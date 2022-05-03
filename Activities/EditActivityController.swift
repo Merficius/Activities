@@ -24,5 +24,10 @@ class EditActivityController: UIViewController {
     func navigateToHome() {
         
     }
+    
+    // Dismisses keyboard when the user touches outside of it
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
