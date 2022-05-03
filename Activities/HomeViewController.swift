@@ -31,5 +31,9 @@ class HomeViewController: UIViewController {
     func readNotTerminatedActivities() {
         
     }
+    
+    @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
+        
+    }
 }
 
