@@ -12,8 +12,8 @@ class Model {
     static func createRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
         var managedObject: NSManagedObject
 
-        Model.entityDescription = NSEntityDescription.entity(forEntityName: "Activity", in: Model.managedObjectContext!)
-        managedObject = NSManagedObject(entity: Model.entityDescription!, insertInto: Model.managedObjectContext)
+        entityDescription = NSEntityDescription.entity(forEntityName: "Activity", in: managedObjectContext!)
+        managedObject = NSManagedObject(entity: entityDescription!, insertInto: Model.managedObjectContext)
         
         managedObject.setValue(id, forKey: "idActivity")
         managedObject.setValue(name, forKey: "activityName")
@@ -23,16 +23,16 @@ class Model {
         managedObject.setValue(realTime, forKey: "activityRealTime")
         managedObject.setValue(isTerminated, forKey: "activityIsTerminated")
         
-        Model.save()
+        save()
     }
     
-    func updateRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
+    static func updateRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
         let activity: Activity!
         var arrayOfManagedObjects: [Activity]
         
-        Model.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
-        Model.fetchRequest.predicate = NSPredicate(format: "idActivity == %@", id)
-        arrayOfManagedObjects = Model.executeFetch()
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+        fetchRequest.predicate = NSPredicate(format: "idActivity == %@", id)
+        arrayOfManagedObjects = executeFetch()
         
         activity = arrayOfManagedObjects.first!
         activity.idActivity = id
@@ -43,47 +43,64 @@ class Model {
         activity.activityRealTime = realTime
         activity.activityIsTerminated = isTerminated
         
-        Model.save()
+        save()
     }
     
-    func deleteRecordInDatabase(withId idActivity: Int64) {
+    static func deleteRecordInDatabase(withId idActivity: Int64) {
         var managedObject: Activity
         
         managedObject = selectActivityById(idActivity)
         Model.managedObjectContext?.delete(managedObject)
-        Model.save()
+        save()
         
     }
     
-    func selectAllTerminatedActivities() -> [Activity] {
+    static func selectAllTerminatedActivities() -> [Activity] {
         var arrayOfManagedObjects: [Activity]
         
-        Model.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
-        Model.fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == true")
-        arrayOfManagedObjects = Model.executeFetch()
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+        fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == true")
+        arrayOfManagedObjects = executeFetch()
         
         return arrayOfManagedObjects
     }
     
-    func selectAllNotTerminatedActivities() -> [Activity] {
+    static func selectAllNotTerminatedActivities() -> [Activity] {
         var arrayOfManagedObjects: [Activity]
         
-        Model.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
-        Model.fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == false")
-        arrayOfManagedObjects = Model.executeFetch()
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+        fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == false")
+        arrayOfManagedObjects = executeFetch()
         return arrayOfManagedObjects
     }
     
-    func selectActivityById(_ idActivity: Int64) -> Activity {
+    static func selectActivityById(_ idActivity: Int64) -> Activity {
         var arrayOfManagedObjects: [Activity]
         var firstObject: Activity
         
-        Model.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
-        Model.fetchRequest.predicate = NSPredicate(format: "idActivity == %@", idActivity)
-        arrayOfManagedObjects = Model.executeFetch()
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+        fetchRequest.predicate = NSPredicate(format: "idActivity == %@", idActivity)
+        arrayOfManagedObjects = executeFetch()
         
         firstObject = arrayOfManagedObjects.first!
         return firstObject
+    }
+    
+    static func selectAllActivities(orderedBy: String) -> [Activity] {
+        var sortDescriptor: NSSortDescriptor
+        var sortDescriptors: [NSSortDescriptor]
+        var arrayOfManagedObjects: [Activity]
+        
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        // we include a sort descriptor
+        sortDescriptor = NSSortDescriptor(key: orderedBy, ascending: false)
+        sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = sortDescriptors
+        
+        arrayOfManagedObjects = executeFetch()
+        return arrayOfManagedObjects
     }
 }
 
@@ -138,12 +155,9 @@ extension Model {
         
         managedObjectContext = appDelegate.persistentContainer.viewContext
         
-        // The name of our Entity in xcdatamodeld is "Users"
+        // The name of our Entity in xcdatamodeld is "Activity"
         entityDescription = NSEntityDescription.entity(forEntityName: "Activity",
                                                        in: managedObjectContext!)
-        
-        insertIntoUsers(idActivity: "hola2", name: "dsas23", description: "wqenwie")
-        print(selectAllFromUsers())
     }
     
     // A fetch to the Managed Object Context
@@ -214,7 +228,7 @@ extension Model {
     // We create a Managed Object into the Managed Object Context
     // for the correspondent Entity Description.
     // Then we set the corresponding values (data).
-    static func insertIntoUsers(idActivity: String, name: String, description: String) {
+    static func insertIntoUsers(idActivity: Int64, name: String, description: String) {
         //        var managedObject: NSManagedObject
         let activity: Activity!
         

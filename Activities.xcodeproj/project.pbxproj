@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E2983A9282B136200BB0F5A /* Activities.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7E2983A7282B136200BB0F5A /* Activities.xcdatamodeld */; };
 		7E2E86CA282A277E005523DE /* LogsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2E86C8282A277E005523DE /* LogsTableViewCell.swift */; };
 		7E2E86CB282A277E005523DE /* LogsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E2E86C9282A277E005523DE /* LogsTableViewCell.xib */; };
 		7E2E86CE282A37CE005523DE /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2E86CC282A37CE005523DE /* ActivitiesTableViewCell.swift */; };
 		7E2E86CF282A37CE005523DE /* ActivitiesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E2E86CD282A37CE005523DE /* ActivitiesTableViewCell.xib */; };
-		7E2E86FB282A72A1005523DE /* Activities.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7E2E86F9282A72A1005523DE /* Activities.xcdatamodeld */; };
 		7E3E6FDB27DA833D00F3F818 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E6FDA27DA833D00F3F818 /* Model.swift */; };
 		7E637C9227D71D5E00F7D36C /* EditActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E637C9127D71D5E00F7D36C /* EditActivityController.swift */; };
 		7E637C9427D71D7900F7D36C /* LogsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E637C9327D71D7900F7D36C /* LogsController.swift */; };
@@ -24,11 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E2983A8282B136200BB0F5A /* Activities.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Activities.xcdatamodel; sourceTree = "<group>"; };
 		7E2E86C8282A277E005523DE /* LogsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsTableViewCell.swift; sourceTree = "<group>"; };
 		7E2E86C9282A277E005523DE /* LogsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogsTableViewCell.xib; sourceTree = "<group>"; };
 		7E2E86CC282A37CE005523DE /* ActivitiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewCell.swift; sourceTree = "<group>"; };
 		7E2E86CD282A37CE005523DE /* ActivitiesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivitiesTableViewCell.xib; sourceTree = "<group>"; };
-		7E2E86FA282A72A1005523DE /* Activities.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Activities.xcdatamodel; sourceTree = "<group>"; };
 		7E3E6FDA27DA833D00F3F818 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		7E637C9127D71D5E00F7D36C /* EditActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActivityController.swift; sourceTree = "<group>"; };
 		7E637C9327D71D7900F7D36C /* LogsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsController.swift; sourceTree = "<group>"; };
@@ -76,7 +76,6 @@
 				7E6690A127D6EAF4006680AB /* SceneDelegate.swift */,
 				7E3E6FDA27DA833D00F3F818 /* Model.swift */,
 				7E6690A327D6EAF4006680AB /* HomeViewController.swift */,
-				7E2E86F9282A72A1005523DE /* Activities.xcdatamodeld */,
 				7E637C9127D71D5E00F7D36C /* EditActivityController.swift */,
 				7E637C9327D71D7900F7D36C /* LogsController.swift */,
 				7E6690A527D6EAF4006680AB /* Main.storyboard */,
@@ -87,6 +86,7 @@
 				7E2E86C9282A277E005523DE /* LogsTableViewCell.xib */,
 				7E2E86CC282A37CE005523DE /* ActivitiesTableViewCell.swift */,
 				7E2E86CD282A37CE005523DE /* ActivitiesTableViewCell.xib */,
+				7E2983A7282B136200BB0F5A /* Activities.xcdatamodeld */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -165,13 +165,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E3E6FDB27DA833D00F3F818 /* Model.swift in Sources */,
-				7E2E86FB282A72A1005523DE /* Activities.xcdatamodeld in Sources */,
 				7E2E86CA282A277E005523DE /* LogsTableViewCell.swift in Sources */,
 				7E6690A427D6EAF4006680AB /* HomeViewController.swift in Sources */,
 				7E6690A027D6EAF4006680AB /* AppDelegate.swift in Sources */,
 				7E637C9427D71D7900F7D36C /* LogsController.swift in Sources */,
 				7E637C9227D71D5E00F7D36C /* EditActivityController.swift in Sources */,
 				7E2E86CE282A37CE005523DE /* ActivitiesTableViewCell.swift in Sources */,
+				7E2983A9282B136200BB0F5A /* Activities.xcdatamodeld in Sources */,
 				7E6690A227D6EAF4006680AB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,12 +394,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		7E2E86F9282A72A1005523DE /* Activities.xcdatamodeld */ = {
+		7E2983A7282B136200BB0F5A /* Activities.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				7E2E86FA282A72A1005523DE /* Activities.xcdatamodel */,
+				7E2983A8282B136200BB0F5A /* Activities.xcdatamodel */,
 			);
-			currentVersion = 7E2E86FA282A72A1005523DE /* Activities.xcdatamodel */;
+			currentVersion = 7E2983A8282B136200BB0F5A /* Activities.xcdatamodel */;
 			path = Activities.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

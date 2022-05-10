@@ -21,7 +21,34 @@ class EditActivityController: UIViewController {
     }
     
     func storeActivityData() {
-        Model.createRecordInDatabase(id: <#T##String#>, name: <#T##String#>, description: <#T##String#>, estimatedTime: <#T##Int#>, scheduledTime: <#T##Int#>, realTime: <#T##Int#>, isTerminated: <#T##Bool#>)
+        var newActivityId: Int64 = 0
+        let estimatedTime = calculateTime(.estimated)
+        let scheduledTime = calculateTime(.scheduled)
+        let realTime = calculateTime(.real)
+    
+        if let previousActivity = Model.selectAllActivities(orderedBy: "idActivity").first {
+            newActivityId = previousActivity.idActivity + 1
+        }
+        
+        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: false)
+    }
+    
+    func calculateTime(_ time: Time) -> Int64 {
+        var timeComponents: DateComponents
+        var totalTime: Int64
+        
+        switch time {
+        case .estimated:
+            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityEstimatedTime.date)
+        case .scheduled:
+            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityScheduledTime.date)
+        case .real:
+            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityRealTime.date)
+        }
+        
+        totalTime = Int64(timeComponents.hour! + timeComponents.minute!)
+        
+        return totalTime
     }
     
     func navigateToHome() {
@@ -31,6 +58,12 @@ class EditActivityController: UIViewController {
     // Dismisses keyboard when the user touches outside of it
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    enum Time {
+        case estimated
+        case scheduled
+        case real
     }
 }
 

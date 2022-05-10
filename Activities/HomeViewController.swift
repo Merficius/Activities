@@ -7,6 +7,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Model.initialize()
+        
         let nib = UINib(nibName: "ActivitiesTableViewCell", bundle: nil)
         ActivitiesTableView.register(nib, forCellReuseIdentifier: "ActivitiesTableViewCell")
         ActivitiesTableView.delegate = self
@@ -49,7 +51,10 @@ class HomeViewController: UIViewController {
     
     // Used when the user taps the done button
     @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
-        Model.initialize()
+        
+        if let editActivityController = unwindSegue.source as? EditActivityController {
+            editActivityController.storeActivityData()
+        }
     }
 }
 
