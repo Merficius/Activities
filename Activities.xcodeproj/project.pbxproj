@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7E2E86CA282A277E005523DE /* LogsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2E86C8282A277E005523DE /* LogsTableViewCell.swift */; };
 		7E2E86CB282A277E005523DE /* LogsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E2E86C9282A277E005523DE /* LogsTableViewCell.xib */; };
+		7E2E86CE282A37CE005523DE /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2E86CC282A37CE005523DE /* ActivitiesTableViewCell.swift */; };
+		7E2E86CF282A37CE005523DE /* ActivitiesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E2E86CD282A37CE005523DE /* ActivitiesTableViewCell.xib */; };
 		7E3E6FDB27DA833D00F3F818 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E6FDA27DA833D00F3F818 /* Model.swift */; };
 		7E637C9227D71D5E00F7D36C /* EditActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E637C9127D71D5E00F7D36C /* EditActivityController.swift */; };
 		7E637C9427D71D7900F7D36C /* LogsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E637C9327D71D7900F7D36C /* LogsController.swift */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		7E2E86C8282A277E005523DE /* LogsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsTableViewCell.swift; sourceTree = "<group>"; };
 		7E2E86C9282A277E005523DE /* LogsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogsTableViewCell.xib; sourceTree = "<group>"; };
+		7E2E86CC282A37CE005523DE /* ActivitiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewCell.swift; sourceTree = "<group>"; };
+		7E2E86CD282A37CE005523DE /* ActivitiesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivitiesTableViewCell.xib; sourceTree = "<group>"; };
 		7E3E6FDA27DA833D00F3F818 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		7E637C9127D71D5E00F7D36C /* EditActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActivityController.swift; sourceTree = "<group>"; };
 		7E637C9327D71D7900F7D36C /* LogsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsController.swift; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 				7E6690AD27D6EAF5006680AB /* Info.plist */,
 				7E2E86C8282A277E005523DE /* LogsTableViewCell.swift */,
 				7E2E86C9282A277E005523DE /* LogsTableViewCell.xib */,
+				7E2E86CC282A37CE005523DE /* ActivitiesTableViewCell.swift */,
+				7E2E86CD282A37CE005523DE /* ActivitiesTableViewCell.xib */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -147,6 +153,7 @@
 				7E6690A927D6EAF5006680AB /* Assets.xcassets in Resources */,
 				7E2E86CB282A277E005523DE /* LogsTableViewCell.xib in Resources */,
 				7E6690A727D6EAF4006680AB /* Main.storyboard in Resources */,
+				7E2E86CF282A37CE005523DE /* ActivitiesTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +171,7 @@
 				7E6690A027D6EAF4006680AB /* AppDelegate.swift in Sources */,
 				7E637C9427D71D7900F7D36C /* LogsController.swift in Sources */,
 				7E637C9227D71D5E00F7D36C /* EditActivityController.swift in Sources */,
+				7E2E86CE282A37CE005523DE /* ActivitiesTableViewCell.swift in Sources */,
 				7E6690A227D6EAF4006680AB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
