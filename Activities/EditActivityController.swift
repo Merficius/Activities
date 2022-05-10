@@ -46,7 +46,7 @@ class EditActivityController: UIViewController {
             timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityRealTime.date)
         }
         
-        totalTime = Int64(timeComponents.hour! + timeComponents.minute!)
+        totalTime = Int64(timeComponents.hour! * 60 + timeComponents.minute!)
         
         return totalTime
     }

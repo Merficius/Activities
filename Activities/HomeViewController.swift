@@ -54,6 +54,7 @@ class HomeViewController: UIViewController {
         
         if let editActivityController = unwindSegue.source as? EditActivityController {
             editActivityController.storeActivityData()
+            print(Model.selectAllActivities(orderedBy: "idActivity"))
         }
     }
 }
