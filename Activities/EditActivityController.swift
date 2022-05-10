@@ -1,24 +1,27 @@
 import UIKit
 
 class EditActivityController: UIViewController {
-    @IBOutlet weak var activityName: UITextField!
-    @IBOutlet weak var activityDescription: UITextView!
-    @IBOutlet weak var activityEstimatedTime: UIDatePicker!
-    @IBOutlet weak var activityHasScheduledTime: UISwitch!
-    @IBOutlet weak var activityScheduledTime: UIDatePicker!
-    @IBOutlet weak var activityRealTime: UIDatePicker!
+    @IBOutlet var activityName: UITextField!
+    @IBOutlet var activityDescription: UITextView!
+    @IBOutlet var activityEstimatedTime: UIDatePicker!
+    @IBOutlet var activityHasScheduledTime: UISwitch!
+    @IBOutlet var activityScheduledTime: UIDatePicker!
+    @IBOutlet var activityRealTime: UIDatePicker!
+    @IBOutlet var editActivityTitleLabel: UILabel!
+    var controllerTitle: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        presentEditActivityView()
     }
 
     func presentEditActivityView() {
-        
+        editActivityTitleLabel.text = controllerTitle
     }
     
     func storeActivityData() {
-        
+            
     }
     
     func navigateToHome() {

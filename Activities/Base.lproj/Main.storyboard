@@ -39,7 +39,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system"/>
                                         <connections>
-                                            <segue destination="kCa-Ig-bhl" kind="show" id="B4P-Qq-6d3"/>
+                                            <action selector="navigateToEditActivity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vIC-TP-HNE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -61,6 +61,7 @@
                     <connections>
                         <outlet property="ActivitiesTableView" destination="XBP-Mh-gdL" id="gD9-14-nAm"/>
                         <segue destination="kCa-Ig-bhl" kind="show" identifier="EditActivity" id="nu7-ep-wLi"/>
+                        <segue destination="kCa-Ig-bhl" kind="show" identifier="NewActivity" id="LgW-7T-Eor"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -272,6 +273,7 @@
                         <outlet property="activityName" destination="Zxm-ma-Toe" id="0xS-2p-iHn"/>
                         <outlet property="activityRealTime" destination="Zaj-V9-5FK" id="lfW-Yz-AJ1"/>
                         <outlet property="activityScheduledTime" destination="Mtc-0y-epR" id="k0C-15-SFC"/>
+                        <outlet property="editActivityTitleLabel" destination="R6v-f5-jwz" id="gze-yg-tdX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EF5-y9-nSU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -347,7 +349,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nu7-ep-wLi"/>
+        <segue reference="LgW-7T-Eor"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="house" catalog="system" width="128" height="106"/>

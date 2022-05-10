@@ -13,8 +13,18 @@ class HomeViewController: UIViewController {
         ActivitiesTableView.dataSource = self
     }
     
-    func navigateToEditActivity() {
+    @IBAction func navigateToEditActivity(_ sender: UIButton) {
+        performSegue(withIdentifier: "NewActivity", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let editActivityController = segue.destination as? EditActivityController else { return }
         
+        if let _ = sender as? UIButton {
+            editActivityController.controllerTitle = "New Activity"
+        } else if let _ = sender as? UITableView {
+            editActivityController.controllerTitle = "Edit Activity"
+        }
     }
     
     func presentHomeView() {
@@ -46,7 +56,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselects the row and performs the segue to EditActivityController
-        performSegue(withIdentifier: "EditActivity", sender: nil)
+        performSegue(withIdentifier: "EditActivity", sender: tableView)
         ActivitiesTableView.deselectRow(at: indexPath, animated: false)
 
     }

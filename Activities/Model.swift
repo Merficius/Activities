@@ -10,27 +10,72 @@ class Model {
     }
     
     func createRecordInDatabase(withId idActivity: String) {
+        var managedObject: NSManagedObject
+
+        Model.entityDescription = NSEntityDescription.entity(forEntityName: "Activity", in: Model.managedObjectContext!)
+        managedObject = NSManagedObject(entity: Model.entityDescription!, insertInto: Model.managedObjectContext)
         
+        managedObject.setValue(idActivity, forKey: "idActivity")
+//        managedObject.setValue(name, forKey: "activityName")
+//        managedObject.setValue(description, forKey: "activityDescription")
+        
+        Model.save()
     }
     
     func updateRecordInDatabase(withId idActivity: String) {
+        let activity: Activity!
+        var arrayOfManagedObjects: [Activity]
         
+        Model.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+        Model.fetchRequest.predicate = NSPredicate(format: "idActivity == %@", idActivity)
+        arrayOfManagedObjects = Model.executeFetch()
+        
+        activity = arrayOfManagedObjects.first!
+        activity.idActivity = idActivity
+//        activity.activityName = name
+//        activity.activityDescription = description
+        
+        Model.save()
     }
     
     func deleteRecordInDatabase(withId idActivity: String) {
+        var managedObject: Activity
+        
+        managedObject = selectActivityById(idActivity)
+        Model.managedObjectContext?.delete(managedObject)
+        Model.save()
         
     }
     
     func selectAllTerminatedActivities() -> [Activity] {
-        return [Activity]()
+        var arrayOfManagedObjects: [Activity]
+        
+        Model.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+        Model.fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == true")
+        arrayOfManagedObjects = Model.executeFetch()
+        
+        return arrayOfManagedObjects
     }
     
     func selectAllNotTerminatedActivities() -> [Activity] {
-        return [Activity]()
+        var arrayOfManagedObjects: [Activity]
+        
+        Model.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+        Model.fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == false")
+        arrayOfManagedObjects = Model.executeFetch()
+        return arrayOfManagedObjects
     }
     
     func selectActivityById(_ idActivity: String) -> Activity {
-        return Activity()
+        var arrayOfManagedObjects: [Activity]
+        var firstObject: Activity
+        
+        Model.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+        Model.fetchRequest.predicate = NSPredicate(format: "idActivity == %@", idActivity)
+        arrayOfManagedObjects = Model.executeFetch()
+        
+        firstObject = arrayOfManagedObjects.first!
+        return firstObject
     }
 }
 
@@ -162,35 +207,35 @@ extension Model {
     // for the correspondent Entity Description.
     // Then we set the corresponding values (data).
     static func insertIntoUsers(idActivity: String, name: String, description: String) {
-//        var managedObject: NSManagedObject
+        //        var managedObject: NSManagedObject
         let activity: Activity!
         
-//        entityDescription = NSEntityDescription.entity(forEntityName: "Activity", in: managedObjectContext!)
-//        managedObject = NSManagedObject(entity: entityDescription!, insertInto: managedObjectContext)
-//        managedObject.setValue(idActivity, forKey: "idActivity")
-//        managedObject.setValue(name, forKey: "activityName")
-//        managedObject.setValue(description, forKey: "activityDescription")
+        //        entityDescription = NSEntityDescription.entity(forEntityName: "Activity", in: managedObjectContext!)
+        //        managedObject = NSManagedObject(entity: entityDescription!, insertInto: managedObjectContext)
+        //        managedObject.setValue(idActivity, forKey: "idActivity")
+        //        managedObject.setValue(name, forKey: "activityName")
+        //        managedObject.setValue(description, forKey: "activityDescription")
         
         
         var arrayOfManagedObjects: [Activity]
-
+        
         fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
         fetchRequest.predicate = NSPredicate(format: "idActivity == %@", idActivity)
         arrayOfManagedObjects = executeFetch()
-
+        
         if arrayOfManagedObjects.count == 0 {
-           // here you are inserting
-           activity = Activity(context: managedObjectContext!)
+            // here you are inserting
+            activity = Activity(context: managedObjectContext!)
         } else {
-           // here you are updating
-           activity = arrayOfManagedObjects.first!
+            // here you are updating
+            activity = arrayOfManagedObjects.first!
         }
-
+        
         activity.idActivity = idActivity
         activity.activityName = name
         activity.activityDescription = description
         
-        Model.save()
+        save()
     }
     
     
