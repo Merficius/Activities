@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
     
     // Used when the user taps the done button
     @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
-        
+        Model.initialize()
     }
 }
 

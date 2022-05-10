@@ -21,7 +21,6 @@
 		7E6690A727D6EAF4006680AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E6690A527D6EAF4006680AB /* Main.storyboard */; };
 		7E6690A927D6EAF5006680AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E6690A827D6EAF5006680AB /* Assets.xcassets */; };
 		7E6690AC27D6EAF5006680AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E6690AA27D6EAF5006680AB /* LaunchScreen.storyboard */; };
-		7EC3C9CB27D88CF600B71574 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3C9CA27D88CF600B71574 /* Activity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +40,6 @@
 		7E6690A827D6EAF5006680AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E6690AB27D6EAF5006680AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E6690AD27D6EAF5006680AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7EC3C9CA27D88CF600B71574 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +74,6 @@
 			children = (
 				7E66909F27D6EAF4006680AB /* AppDelegate.swift */,
 				7E6690A127D6EAF4006680AB /* SceneDelegate.swift */,
-				7EC3C9CA27D88CF600B71574 /* Activity.swift */,
 				7E3E6FDA27DA833D00F3F818 /* Model.swift */,
 				7E6690A327D6EAF4006680AB /* HomeViewController.swift */,
 				7E2E86F9282A72A1005523DE /* Activities.xcdatamodeld */,
@@ -168,7 +165,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E3E6FDB27DA833D00F3F818 /* Model.swift in Sources */,
-				7EC3C9CB27D88CF600B71574 /* Activity.swift in Sources */,
 				7E2E86FB282A72A1005523DE /* Activities.xcdatamodeld in Sources */,
 				7E2E86CA282A277E005523DE /* LogsTableViewCell.swift in Sources */,
 				7E6690A427D6EAF4006680AB /* HomeViewController.swift in Sources */,
