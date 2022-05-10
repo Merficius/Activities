@@ -21,19 +21,19 @@
                         <rect key="frame" x="16" y="30" width="396" height="68"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2W-nZ-fbw">
-                                <rect key="frame" x="0.0" y="0.0" width="198" height="68"/>
+                                <rect key="frame" x="0.0" y="0.0" width="247.5" height="68"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTC-dh-yFQ">
-                                <rect key="frame" x="198" y="0.0" width="158.5" height="68"/>
+                                <rect key="frame" x="247.5" y="0.0" width="99" height="68"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5i-vt-040">
-                                <rect key="frame" x="356.5" y="0.0" width="39.5" height="68"/>
+                                <rect key="frame" x="346.5" y="0.0" width="49.5" height="68"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="play" catalog="system" title="">
                                     <color key="baseBackgroundColor" systemColor="systemGreenColor"/>
@@ -42,10 +42,10 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="r2W-nZ-fbw" firstAttribute="leading" secondItem="ON0-cJ-tUd" secondAttribute="leading" id="0Oh-Od-w2t"/>
-                            <constraint firstItem="r2W-nZ-fbw" firstAttribute="width" secondItem="ON0-cJ-tUd" secondAttribute="width" multiplier="5/10" id="aG8-SO-XUt"/>
-                            <constraint firstItem="cTC-dh-yFQ" firstAttribute="width" secondItem="ON0-cJ-tUd" secondAttribute="width" multiplier="4/10" id="nia-KT-1f6"/>
+                            <constraint firstItem="r2W-nZ-fbw" firstAttribute="width" secondItem="ON0-cJ-tUd" secondAttribute="width" multiplier="5/8" id="aG8-SO-XUt"/>
+                            <constraint firstItem="cTC-dh-yFQ" firstAttribute="width" secondItem="ON0-cJ-tUd" secondAttribute="width" multiplier="2/8" id="nia-KT-1f6"/>
                             <constraint firstItem="F5i-vt-040" firstAttribute="leading" secondItem="cTC-dh-yFQ" secondAttribute="trailing" id="p8V-th-M8d"/>
-                            <constraint firstItem="F5i-vt-040" firstAttribute="width" secondItem="ON0-cJ-tUd" secondAttribute="width" multiplier="1/10" id="yxt-ct-zzP"/>
+                            <constraint firstItem="F5i-vt-040" firstAttribute="width" secondItem="ON0-cJ-tUd" secondAttribute="width" multiplier="1/8" id="yxt-ct-zzP"/>
                             <constraint firstItem="cTC-dh-yFQ" firstAttribute="leading" secondItem="r2W-nZ-fbw" secondAttribute="trailing" id="zne-cj-ksx"/>
                         </constraints>
                     </stackView>
