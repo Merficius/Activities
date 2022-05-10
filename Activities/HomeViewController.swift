@@ -8,11 +8,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         Model.initialize()
+        readNotTerminatedActivities()
         
         let nib = UINib(nibName: "ActivitiesTableViewCell", bundle: nil)
         ActivitiesTableView.register(nib, forCellReuseIdentifier: "ActivitiesTableViewCell")
         ActivitiesTableView.delegate = self
         ActivitiesTableView.dataSource = self
+//        Model.deleteAllFromUsers()
     }
     
     @IBAction func navigateToEditActivity(_ sender: UIButton) {
@@ -46,7 +48,7 @@ class HomeViewController: UIViewController {
     }
     
     func readNotTerminatedActivities() {
-        
+        Model.selectAllNotTerminatedActivities()
     }
     
     // Used when the user taps the done button

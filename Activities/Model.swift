@@ -3,10 +3,11 @@ import CoreData
 import UIKit
 
 class Model {
-    var Activities: [Activity]
+    static var terminatedActivities: [Activity] = []
+    static var notTerminatedActivities: [Activity] = []
     
     init() {
-        Activities = []
+        
     }
     
     static func createRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
@@ -62,6 +63,8 @@ class Model {
         fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == true")
         arrayOfManagedObjects = executeFetch()
         
+        terminatedActivities = arrayOfManagedObjects
+        
         return arrayOfManagedObjects
     }
     
@@ -71,6 +74,9 @@ class Model {
         fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
         fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == false")
         arrayOfManagedObjects = executeFetch()
+        
+        notTerminatedActivities = arrayOfManagedObjects
+        
         return arrayOfManagedObjects
     }
     
@@ -266,12 +272,14 @@ extension Model {
     static func deleteAllFromUsers() {
         var arrayOfManagedObjects: [Activity]
         
-        arrayOfManagedObjects = selectAllFromUsers()
+        arrayOfManagedObjects = selectAllActivities(orderedBy: "idActivity")
         
         // remove each one of the Managed Objects from the Managed Object Context
         for object in arrayOfManagedObjects {
             managedObjectContext?.delete(object)
         }
+        
+        save()
     }
     
     static func deleteFromUsersWhere(username: String) {

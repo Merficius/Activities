@@ -16,9 +16,16 @@ class LogsController: UIViewController {
         // Assigns the datasource to itself
         LogsTableView.dataSource = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        readTerminatedActivities()
+    }
 
     func readTerminatedActivities() {
-        
+        Model.selectAllTerminatedActivities()
+        LogsTableView.reloadData()
     }
     
     func presentLogsView() {
@@ -36,11 +43,15 @@ extension LogsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LogsTableViewCell", for: indexPath) as! LogsTableViewCell
         
+        cell.LogsActivityNameLabel.text = Model.terminatedActivities[indexPath.row].activityName
+        cell.LogsActivityDurationLabel.text = String(Model.terminatedActivities[indexPath.row].activityRealTime)
+        cell.LogsActivityPercentageLabel.text = String(Model.terminatedActivities[indexPath.row].activityRealTime * 100 / 1440) + "%"
+        
         return cell
     }
     
     // Returns the number of cells wanted
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return Model.terminatedActivities.count
     }
 }

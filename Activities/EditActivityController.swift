@@ -30,7 +30,7 @@ class EditActivityController: UIViewController {
             newActivityId = previousActivity.idActivity + 1
         }
         
-        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: false)
+        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: true)
     }
     
     func calculateTime(_ time: Time) -> Int64 {
