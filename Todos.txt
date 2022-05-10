@@ -1,0 +1,6 @@
+#TODO
+Make a custom table view for home activities
+Make a normal table view for logs
+Connect the data of new activity to home activities (preparationsegue)
+Make and connect database
+Make activities form home tappable to present the edit screen
