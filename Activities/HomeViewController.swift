@@ -2,16 +2,21 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet var ActivitiesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let nib = UINib(nibName: "ActivitiesTableViewCell", bundle: nil)
+        ActivitiesTableView.register(nib, forCellReuseIdentifier: "ActivitiesTableViewCell")
+        ActivitiesTableView.delegate = self
+        ActivitiesTableView.dataSource = self
     }
     
     func navigateToEditActivity() {
         
     }
-
+    
     func presentHomeView() {
         
     }
@@ -37,3 +42,20 @@ class HomeViewController: UIViewController {
     }
 }
 
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("hello from activities home")
+    }
+}
+
+extension HomeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = ActivitiesTableView.dequeueReusableCell(withIdentifier: "ActivitiesTableViewCell", for: indexPath) as! ActivitiesTableViewCell
+        
+        return cell
+    }
+}

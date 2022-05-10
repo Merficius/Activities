@@ -41,6 +41,6 @@ extension LogsController: UITableViewDataSource {
     
     // Returns the number of cells wanted
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 10
     }
 }
