@@ -1,6 +1,7 @@
 #TODO
-Make a custom table view for home activities - IN PROGRESS
+Make a custom table view for home activities - DONE
 Make a normal table view for logs - DONE
 Connect the data of new activity to home activities (preparationsegue)
 Make and connect database
-Make activities form home tappable to present the edit screen
+Make activities form home tappable to present the edit screen -DONE
+Add constraints to the edit activity - in progress

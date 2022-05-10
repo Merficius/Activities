@@ -37,6 +37,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system"/>
+                                        <connections>
+                                            <segue destination="kCa-Ig-bhl" kind="show" id="B4P-Qq-6d3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -56,6 +59,7 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="vNE-z9-Ov7"/>
                     <connections>
                         <outlet property="ActivitiesTableView" destination="XBP-Mh-gdL" id="gD9-14-nAm"/>
+                        <segue destination="kCa-Ig-bhl" kind="show" identifier="EditActivity" id="nu7-ep-wLi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -65,7 +69,7 @@
         <!--Edit Activity Controller-->
         <scene sceneID="nox-Dt-MI1">
             <objects>
-                <viewController id="kCa-Ig-bhl" customClass="EditActivityController" customModule="Activities" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="kCa-Ig-bhl" customClass="EditActivityController" customModule="Activities" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bYz-eX-K4G">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,7 +145,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Done"/>
                                 <connections>
-                                    <segue destination="3r8-6b-QEu" kind="unwind" unwindAction="unwindToHomeWithUnwindSegue:" id="E8t-US-nob"/>
+                                    <segue destination="3r8-6b-QEu" kind="unwind" unwindAction="unwindToHomeWithUnwindSegue:" id="5DI-ck-n5L"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOb-4V-QhT">
@@ -206,7 +210,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7ti-FY-cU0" userLabel="LogsTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7ti-FY-cU0" userLabel="LogsTableView">
                                 <rect key="frame" x="0.0" y="113" width="390" height="648"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -253,6 +257,9 @@
             <point key="canvasLocation" x="138.40000000000001" y="130.88455772113943"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="nu7-ep-wLi"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>

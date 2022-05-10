@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
         
     }
     
+    // Used when the user taps the done button
     @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
         
     }
@@ -44,7 +45,10 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("hello from activities home")
+        // Deselects the row and performs the segue to EditActivityController
+        performSegue(withIdentifier: "EditActivity", sender: nil)
+        ActivitiesTableView.deselectRow(at: indexPath, animated: false)
+
     }
 }
 
