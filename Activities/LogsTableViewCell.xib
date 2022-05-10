@@ -17,34 +17,34 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZE-0t-ZlR">
-                        <rect key="frame" x="0.0" y="46" width="124.5" height="21"/>
+                        <rect key="frame" x="0.0" y="46.5" width="124.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Percentage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0Z-lT-R4k">
-                        <rect key="frame" x="249.5" y="46" width="124.5" height="21"/>
+                        <rect key="frame" x="249.5" y="46.5" width="124.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gs6-pF-j5F">
-                        <rect key="frame" x="124.5" y="46" width="125" height="21"/>
+                        <rect key="frame" x="124.5" y="46.5" width="125" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="gs6-pF-j5F" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/3" id="4Iv-Fb-SQY"/>
-                    <constraint firstItem="O0Z-lT-R4k" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/3" id="GGS-u7-CPc"/>
-                    <constraint firstItem="gs6-pF-j5F" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Qje-bo-nfV"/>
-                    <constraint firstItem="O0Z-lT-R4k" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="a2G-fI-5GW"/>
-                    <constraint firstItem="bZE-0t-ZlR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cWb-ZT-ydF"/>
-                    <constraint firstItem="bZE-0t-ZlR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="liK-Z4-QCe"/>
-                    <constraint firstAttribute="trailing" secondItem="O0Z-lT-R4k" secondAttribute="trailing" id="uBN-Nt-Fxt"/>
-                    <constraint firstItem="bZE-0t-ZlR" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/3" id="vVp-Gg-j4T"/>
-                    <constraint firstItem="gs6-pF-j5F" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zh0-st-Lmw"/>
+                    <constraint firstItem="bZE-0t-ZlR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5pK-5G-gYY"/>
+                    <constraint firstAttribute="trailing" secondItem="O0Z-lT-R4k" secondAttribute="trailing" id="CSm-mY-bLv"/>
+                    <constraint firstItem="gs6-pF-j5F" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="S1d-z5-1hu"/>
+                    <constraint firstItem="O0Z-lT-R4k" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/3" id="T4k-7Q-Fyo"/>
+                    <constraint firstItem="gs6-pF-j5F" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/3" id="dBU-sF-9sn"/>
+                    <constraint firstItem="gs6-pF-j5F" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ieW-2M-q53"/>
+                    <constraint firstItem="bZE-0t-ZlR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lx8-tP-xjM"/>
+                    <constraint firstItem="bZE-0t-ZlR" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/3" id="tbe-gz-skQ"/>
+                    <constraint firstItem="O0Z-lT-R4k" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ztt-Jv-Tzs"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
