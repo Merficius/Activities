@@ -9,36 +9,44 @@ class Model {
         Activities = []
     }
     
-    func createRecordInDatabase(withId idActivity: String) {
+    static func createRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
         var managedObject: NSManagedObject
 
         Model.entityDescription = NSEntityDescription.entity(forEntityName: "Activity", in: Model.managedObjectContext!)
         managedObject = NSManagedObject(entity: Model.entityDescription!, insertInto: Model.managedObjectContext)
         
-        managedObject.setValue(idActivity, forKey: "idActivity")
-//        managedObject.setValue(name, forKey: "activityName")
-//        managedObject.setValue(description, forKey: "activityDescription")
+        managedObject.setValue(id, forKey: "idActivity")
+        managedObject.setValue(name, forKey: "activityName")
+        managedObject.setValue(description, forKey: "activityDescription")
+        managedObject.setValue(estimatedTime, forKey: "activityEstimatedTime")
+        managedObject.setValue(scheduledTime, forKey: "activityScheduledTime")
+        managedObject.setValue(realTime, forKey: "activityRealTime")
+        managedObject.setValue(isTerminated, forKey: "activityIsTerminated")
         
         Model.save()
     }
     
-    func updateRecordInDatabase(withId idActivity: String) {
+    func updateRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
         let activity: Activity!
         var arrayOfManagedObjects: [Activity]
         
         Model.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
-        Model.fetchRequest.predicate = NSPredicate(format: "idActivity == %@", idActivity)
+        Model.fetchRequest.predicate = NSPredicate(format: "idActivity == %@", id)
         arrayOfManagedObjects = Model.executeFetch()
         
         activity = arrayOfManagedObjects.first!
-        activity.idActivity = idActivity
-//        activity.activityName = name
-//        activity.activityDescription = description
+        activity.idActivity = id
+        activity.activityName = name
+        activity.activityDescription = description
+        activity.activityEstimatedTime = estimatedTime
+        activity.activityScheduledTime = scheduledTime
+        activity.activityRealTime = realTime
+        activity.activityIsTerminated = isTerminated
         
         Model.save()
     }
     
-    func deleteRecordInDatabase(withId idActivity: String) {
+    func deleteRecordInDatabase(withId idActivity: Int64) {
         var managedObject: Activity
         
         managedObject = selectActivityById(idActivity)
@@ -66,7 +74,7 @@ class Model {
         return arrayOfManagedObjects
     }
     
-    func selectActivityById(_ idActivity: String) -> Activity {
+    func selectActivityById(_ idActivity: Int64) -> Activity {
         var arrayOfManagedObjects: [Activity]
         var firstObject: Activity
         

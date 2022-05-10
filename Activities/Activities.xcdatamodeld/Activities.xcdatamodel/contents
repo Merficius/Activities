@@ -7,9 +7,9 @@
         <attribute name="activityName" optional="YES" attributeType="String"/>
         <attribute name="activityRealTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="activityScheduledTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="idActivity" optional="YES" attributeType="String"/>
+        <attribute name="idActivity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Activity" positionX="-36" positionY="9" width="128" height="134"/>
+        <element name="Activity" positionX="-36" positionY="9" width="128" height="14"/>
     </elements>
 </model>

@@ -21,7 +21,7 @@ class EditActivityController: UIViewController {
     }
     
     func storeActivityData() {
-            
+        Model.createRecordInDatabase(id: <#T##String#>, name: <#T##String#>, description: <#T##String#>, estimatedTime: <#T##Int#>, scheduledTime: <#T##Int#>, realTime: <#T##Int#>, isTerminated: <#T##Bool#>)
     }
     
     func navigateToHome() {
