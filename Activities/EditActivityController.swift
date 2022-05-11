@@ -28,7 +28,8 @@ class EditActivityController: UIViewController {
         setTime(.real, minutes: Int(currentActivity.activityRealTime))
         
         activityName.text = currentActivity.activityName
-        activityDescription.text = currentActivity.description
+
+        activityDescription.text = currentActivity.activityDescription
         
         activityHasScheduledTime.isOn = currentActivity.activityScheduledTime != 0 ? true : false
     }
