@@ -2,7 +2,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet var ActivitiesTableView: UITableView!
+    @IBOutlet var activitiesTableView: UITableView!
+    var currentIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -11,12 +12,18 @@ class HomeViewController: UIViewController {
         readNotTerminatedActivities()
         
         let nib = UINib(nibName: "ActivitiesTableViewCell", bundle: nil)
-        ActivitiesTableView.register(nib, forCellReuseIdentifier: "ActivitiesTableViewCell")
-        ActivitiesTableView.delegate = self
-        ActivitiesTableView.dataSource = self
+        activitiesTableView.register(nib, forCellReuseIdentifier: "ActivitiesTableViewCell")
+        activitiesTableView.delegate = self
+        activitiesTableView.dataSource = self
 //        Model.deleteAllFromUsers()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        readNotTerminatedActivities()
+    }
+
     @IBAction func navigateToEditActivity(_ sender: UIButton) {
         performSegue(withIdentifier: "NewActivity", sender: sender)
     }
@@ -28,6 +35,7 @@ class HomeViewController: UIViewController {
             editActivityController.controllerTitle = "New Activity"
         } else if let _ = sender as? UITableView {
             editActivityController.controllerTitle = "Edit Activity"
+            editActivityController.currentActivityId = Int64(currentIndex)
         }
     }
     
@@ -49,34 +57,47 @@ class HomeViewController: UIViewController {
     
     func readNotTerminatedActivities() {
         Model.selectAllNotTerminatedActivities()
+        activitiesTableView.reloadData()
     }
     
     // Used when the user taps the done button
     @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
-        
         if let editActivityController = unwindSegue.source as? EditActivityController {
             editActivityController.storeActivityData()
-            print(Model.selectAllActivities(orderedBy: "idActivity"))
+//            print(Model.selectAllActivities(orderedBy: "idActivity"))
+        }
+    }
+    
+    // Used when the user taps the end activity button
+    @IBAction func endActivityUnwind(unwindSegue: UIStoryboardSegue) {
+        if let editActivityController = unwindSegue.source as? EditActivityController {
+            editActivityController.updateActivityData(terminateActivity: true)
+//            print(Model.selectAllActivities(orderedBy: "idActivity"))
         }
     }
 }
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentIndex = indexPath.row
+        
         // Deselects the row and performs the segue to EditActivityController
         performSegue(withIdentifier: "EditActivity", sender: tableView)
-        ActivitiesTableView.deselectRow(at: indexPath, animated: false)
-
+        activitiesTableView.deselectRow(at: indexPath, animated: false)
     }
 }
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return Model.notTerminatedActivities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = ActivitiesTableView.dequeueReusableCell(withIdentifier: "ActivitiesTableViewCell", for: indexPath) as! ActivitiesTableViewCell
+        let cell = activitiesTableView.dequeueReusableCell(withIdentifier: "ActivitiesTableViewCell", for: indexPath) as! ActivitiesTableViewCell
+        
+        cell.ActivityNameLabel.text = Model.notTerminatedActivities[indexPath.row].activityName
+        cell.ActivityDurationLabel.text = String(Model.notTerminatedActivities[indexPath.row].activityRealTime)
+//        cell.ActivityControlButton.text = String(format: "%.1f", percentageDuration) + "%"
         
         return cell
     }

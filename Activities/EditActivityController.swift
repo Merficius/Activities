@@ -9,6 +9,7 @@ class EditActivityController: UIViewController {
     @IBOutlet var activityRealTime: UIDatePicker!
     @IBOutlet var editActivityTitleLabel: UILabel!
     var controllerTitle: String = ""
+    var currentActivityId: Int64 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,15 @@ class EditActivityController: UIViewController {
             newActivityId = previousActivity.idActivity + 1
         }
         
-        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: true)
+        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: false)
+    }
+    
+    func updateActivityData(terminateActivity: Bool) {
+        let estimatedTime = calculateTime(.estimated)
+        let scheduledTime = calculateTime(.scheduled)
+        let realTime = calculateTime(.real)
+        
+        Model.updateRecordInDatabase(id: currentActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
     }
     
     func calculateTime(_ time: Time) -> Int64 {

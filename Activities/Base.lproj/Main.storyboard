@@ -95,6 +95,7 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="vNE-z9-Ov7"/>
                     <connections>
                         <outlet property="ActivitiesTableView" destination="XBP-Mh-gdL" id="gD9-14-nAm"/>
+                        <outlet property="activitiesTableView" destination="XBP-Mh-gdL" id="7Up-B1-Rw0"/>
                         <segue destination="kCa-Ig-bhl" kind="show" identifier="EditActivity" id="nu7-ep-wLi"/>
                         <segue destination="kCa-Ig-bhl" kind="show" identifier="NewActivity" id="LgW-7T-Eor"/>
                     </connections>
@@ -121,6 +122,9 @@
                                         <buttonConfiguration key="configuration" style="plain" title="End activity">
                                             <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="3r8-6b-QEu" kind="unwind" unwindAction="endActivityUnwindWithUnwindSegue:" id="r7S-rW-FzP"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6v-f5-jwz">
                                         <rect key="frame" x="89.666666666666686" y="0.0" width="179" height="54.666666666666664"/>
@@ -392,6 +396,7 @@
                     <tabBarItem key="tabBarItem" title="Logs" image="list.bullet" catalog="system" id="PGT-ys-l6L"/>
                     <connections>
                         <outlet property="LogsTableView" destination="7ti-FY-cU0" id="55c-Jf-NkT"/>
+                        <outlet property="logsTableView" destination="7ti-FY-cU0" id="USZ-it-7p5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aiw-aa-M60" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -2,7 +2,7 @@ import UIKit
 
 class LogsController: UIViewController {
 
-    @IBOutlet var LogsTableView: UITableView!
+    @IBOutlet var logsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -11,10 +11,10 @@ class LogsController: UIViewController {
         let nib = UINib(nibName: "LogsTableViewCell", bundle: nil)
         
         // Registers the custom nib so that we can use it in our tableview
-        LogsTableView.register(nib, forCellReuseIdentifier: "LogsTableViewCell")
+        logsTableView.register(nib, forCellReuseIdentifier: "LogsTableViewCell")
         
         // Assigns the datasource to itself
-        LogsTableView.dataSource = self
+        logsTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,7 +25,7 @@ class LogsController: UIViewController {
 
     func readTerminatedActivities() {
         Model.selectAllTerminatedActivities()
-        LogsTableView.reloadData()
+        logsTableView.reloadData()
     }
     
     func presentLogsView() {

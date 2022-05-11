@@ -28,14 +28,8 @@ class Model {
     }
     
     static func updateRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
-        let activity: Activity!
-        var arrayOfManagedObjects: [Activity]
-        
-        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
-        fetchRequest.predicate = NSPredicate(format: "idActivity == %@", id)
-        arrayOfManagedObjects = executeFetch()
-        
-        activity = arrayOfManagedObjects.first!
+        let activity = selectActivityById(id)
+    
         activity.idActivity = id
         activity.activityName = name
         activity.activityDescription = description
@@ -82,14 +76,13 @@ class Model {
     
     static func selectActivityById(_ idActivity: Int64) -> Activity {
         var arrayOfManagedObjects: [Activity]
-        var firstObject: Activity
         
         fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
-        fetchRequest.predicate = NSPredicate(format: "idActivity == %@", idActivity)
+        fetchRequest.predicate = NSPredicate(format: "idActivity == \(idActivity)")
         arrayOfManagedObjects = executeFetch()
         
-        firstObject = arrayOfManagedObjects.first!
-        return firstObject
+        return arrayOfManagedObjects.first!
+    
     }
     
     static func selectAllActivities(orderedBy: String) -> [Activity] {
