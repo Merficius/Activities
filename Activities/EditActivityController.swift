@@ -107,6 +107,10 @@ class EditActivityController: UIViewController {
         self.view.endEditing(true)
     }
     
+    @IBAction func deleteActivity(_ sender: UIButton) {
+        Model.deleteFromActivities(withId: currentActivityId!)
+    }
+    
     enum Time {
         case estimated
         case scheduled

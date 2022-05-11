@@ -1,4 +1,4 @@
 #TODO
 Implement functions about timing
 Format time and duration to display hours and minutes
-Delete activity button
+Delete activity button - in progress

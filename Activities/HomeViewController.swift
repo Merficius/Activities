@@ -81,6 +81,10 @@ class HomeViewController: UIViewController {
 //            print(Model.selectAllActivities(orderedBy: "idActivity"))
         }
     }
+    
+    @IBAction func unwindWhenDeleted(unwindSegue: UIStoryboardSegue) {
+        
+    }
 }
 
 extension HomeViewController: UITableViewDelegate {

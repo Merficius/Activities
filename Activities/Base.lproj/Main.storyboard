@@ -273,6 +273,10 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Delete activity">
                                     <color key="baseBackgroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="deleteActivity:" destination="kCa-Ig-bhl" eventType="touchUpInside" id="4r6-Hb-do7"/>
+                                    <segue destination="3r8-6b-QEu" kind="unwind" unwindAction="unwindWhenDeletedWithUnwindSegue:" id="AQ0-um-l33"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aSm-RT-317"/>

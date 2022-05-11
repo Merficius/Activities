@@ -101,6 +101,16 @@ class Model {
         arrayOfManagedObjects = executeFetch()
         return arrayOfManagedObjects
     }
+    
+    static func deleteFromActivities(withId id: Int64) {
+        var managedObject: Activity
+        
+        managedObject = selectActivityById(id)
+        
+        managedObjectContext?.delete(managedObject)
+        
+        save()
+    }
 }
 
 extension Model {
