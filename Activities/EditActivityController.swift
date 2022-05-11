@@ -18,7 +18,15 @@ class EditActivityController: UIViewController {
     }
 
     func presentEditActivityView() {
+        let currentActivity = Model.selectActivityById(currentActivityId)
+        setTime(.estimated, minutes: Int(currentActivity.activityEstimatedTime))
+        setTime(.scheduled, minutes: Int(currentActivity.activityScheduledTime))
+        setTime(.real, minutes: Int(currentActivity.activityRealTime))
+        
         editActivityTitleLabel.text = controllerTitle
+        activityName.text = currentActivity.activityName
+        activityDescription.text = currentActivity.description
+        
     }
     
     func storeActivityData() {
@@ -58,6 +66,21 @@ class EditActivityController: UIViewController {
         totalTime = Int64(timeComponents.hour! * 60 + timeComponents.minute!)
         
         return totalTime
+    }
+    
+    func setTime(_ time: Time, minutes: Int = 0) {
+        var timeComponents: DateComponents = DateComponents()
+        timeComponents.hour = minutes / 60
+        timeComponents.minute = minutes % 60
+       
+        switch time {
+        case .estimated:
+            activityEstimatedTime.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
+        case .scheduled:
+            activityScheduledTime.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
+        case .real:
+            activityRealTime.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
+        }
     }
     
     func navigateToHome() {

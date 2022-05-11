@@ -7,6 +7,7 @@ Make activities form home tappable to present the edit screen - DONE
 Add constraints to the edit activity - DONE
 Implement functions about timing
 End activity -DOne
-Reflect fields in edit activity - In progress
+Reflect fields in edit activity - Done
 fix new and edit activity done button
 remove end activity button from new activity
+Fix activity description text
