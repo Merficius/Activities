@@ -83,7 +83,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func unwindWhenDeleted(unwindSegue: UIStoryboardSegue) {
-        
+        // Does nothing
     }
 }
 
@@ -107,8 +107,30 @@ extension HomeViewController: UITableViewDataSource {
         
         cell.ActivityNameLabel.text = Model.notTerminatedActivities[indexPath.row].activityName
         cell.ActivityDurationLabel.text = String(Model.notTerminatedActivities[indexPath.row].activityRealTime)
-//        cell.ActivityControlButton.text = String(format: "%.1f", percentageDuration) + "%"
+        
+        // Allows to perform a function when the button of a cell is tapped
+        cell.ActivityControlButton.addTarget(self, action: #selector(connected(sender:)), for: .touchUpInside)
+        cell.ActivityControlButton.tag = indexPath.row
+
+        // Changing appearance of button
+        if Model.notTerminatedActivities[indexPath.row].timerIsCounting {
+            cell.ActivityControlButton.setImage(UIImage(systemName: "stop"), for: .normal)
+            cell.ActivityControlButton.tintColor = UIColor.systemRed
+        } else {
+            cell.ActivityControlButton.setImage(UIImage(systemName: "play"), for: .normal)
+            cell.ActivityControlButton.tintColor = UIColor.systemGreen
+        }
         
         return cell
+    }
+    
+    // Function that the button is doing
+    @objc func connected(sender: UIButton){
+        let buttonTag = sender.tag
+        
+        Model.notTerminatedActivities[buttonTag].timerIsCounting.toggle()
+        Model.save()
+        
+        activitiesTableView.reloadData()
     }
 }

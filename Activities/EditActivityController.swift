@@ -52,8 +52,6 @@ class EditActivityController: UIViewController {
             newActivityId = previousActivity.idActivity + 1
         }
         
-        
-        
         Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: activityHasScheduledTime.isOn ? scheduledTime : 0, realTime: realTime, isTerminated: false)
     }
     
