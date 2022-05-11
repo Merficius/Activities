@@ -3,7 +3,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet var activitiesTableView: UITableView!
-    var currentIndex: Int = 0
+    var currentIndex: Int64 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +35,7 @@ class HomeViewController: UIViewController {
             editActivityController.controllerTitle = "New Activity"
         } else if let _ = sender as? UITableView {
             editActivityController.controllerTitle = "Edit Activity"
-            editActivityController.currentActivityId = Int64(currentIndex)
-        }
+            editActivityController.currentActivityId = currentIndex        }
     }
     
     func presentHomeView() {
@@ -79,7 +78,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        currentIndex = indexPath.row
+        currentIndex = Model.notTerminatedActivities[indexPath.row].idActivity
         
         // Deselects the row and performs the segue to EditActivityController
         performSegue(withIdentifier: "EditActivity", sender: tableView)
