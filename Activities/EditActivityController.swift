@@ -13,7 +13,8 @@ class EditActivityController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        editActivityTitleLabel.text = controllerTitle
+
         if currentActivityId != nil {
             presentEditActivityView()
         }
@@ -26,7 +27,6 @@ class EditActivityController: UIViewController {
         setTime(.scheduled, minutes: Int(currentActivity.activityScheduledTime))
         setTime(.real, minutes: Int(currentActivity.activityRealTime))
         
-        editActivityTitleLabel.text = controllerTitle
         activityName.text = currentActivity.activityName
         activityDescription.text = currentActivity.description
         

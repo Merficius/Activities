@@ -35,7 +35,8 @@ class HomeViewController: UIViewController {
             editActivityController.controllerTitle = "New Activity"
         } else if let _ = sender as? UITableView {
             editActivityController.controllerTitle = "Edit Activity"
-            editActivityController.currentActivityId = currentIndex        }
+            editActivityController.currentActivityId = currentIndex
+        }
     }
     
     func presentHomeView() {
@@ -62,7 +63,12 @@ class HomeViewController: UIViewController {
     // Used when the user taps the done button
     @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
         if let editActivityController = unwindSegue.source as? EditActivityController {
-            editActivityController.storeActivityData()
+            
+            if editActivityController.editActivityTitleLabel.text == "Edit Activity" {
+                editActivityController.updateActivityData(terminateActivity: false)
+            } else if editActivityController.editActivityTitleLabel.text == "New Activity" {
+                editActivityController.storeActivityData()
+            }
 //            print(Model.selectAllActivities(orderedBy: "idActivity"))
         }
     }

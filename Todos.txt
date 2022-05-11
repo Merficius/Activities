@@ -1,6 +1,6 @@
 #TODO
 Implement functions about timing
-fix new and edit activity done button - In Progress
+fix new and edit activity done button - Done
 remove end activity button from new activity
 Fix activity description text
 Fix zero activities bug - DONE
