@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
         
         if let _ = sender as? UIButton {
             editActivityController.controllerTitle = "New Activity"
+            editActivityController.endActivityButtonIsHidden = true
         } else if let _ = sender as? UITableView {
             editActivityController.controllerTitle = "Edit Activity"
             editActivityController.currentActivityId = currentIndex

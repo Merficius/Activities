@@ -1,6 +1,4 @@
 #TODO
 Implement functions about timing
-remove end activity button from new activity
-Fix activity description text - In progress
 Format time and duration to display hours and minutes
 Delete activity button

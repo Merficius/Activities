@@ -8,12 +8,20 @@ class EditActivityController: UIViewController {
     @IBOutlet var activityScheduledTime: UIDatePicker!
     @IBOutlet var activityRealTime: UIDatePicker!
     @IBOutlet var editActivityTitleLabel: UILabel!
+    @IBOutlet var endActivityButton: UIButton!
+    
     var controllerTitle: String = ""
+    var endActivityButtonIsHidden = false
     var currentActivityId: Int64?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         editActivityTitleLabel.text = controllerTitle
+        
+        if endActivityButtonIsHidden {
+            endActivityButton.isHidden = true
+            editActivityTitleLabel.textAlignment = .left
+        }
 
         if currentActivityId != nil {
             presentEditActivityView()

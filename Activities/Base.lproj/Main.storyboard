@@ -313,6 +313,7 @@
                         <outlet property="activityRealTime" destination="Zaj-V9-5FK" id="lfW-Yz-AJ1"/>
                         <outlet property="activityScheduledTime" destination="Mtc-0y-epR" id="k0C-15-SFC"/>
                         <outlet property="editActivityTitleLabel" destination="R6v-f5-jwz" id="gze-yg-tdX"/>
+                        <outlet property="endActivityButton" destination="sOb-4V-QhT" id="LF1-G1-bcT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EF5-y9-nSU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
