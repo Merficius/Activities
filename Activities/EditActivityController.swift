@@ -19,6 +19,7 @@ class EditActivityController: UIViewController {
 
     func presentEditActivityView() {
         let currentActivity = Model.selectActivityById(currentActivityId)
+        
         setTime(.estimated, minutes: Int(currentActivity.activityEstimatedTime))
         setTime(.scheduled, minutes: Int(currentActivity.activityScheduledTime))
         setTime(.real, minutes: Int(currentActivity.activityRealTime))
@@ -27,6 +28,7 @@ class EditActivityController: UIViewController {
         activityName.text = currentActivity.activityName
         activityDescription.text = currentActivity.description
         
+        activityHasScheduledTime.isOn = currentActivity.activityScheduledTime != 0 ? true : false
     }
     
     func storeActivityData() {
@@ -39,7 +41,9 @@ class EditActivityController: UIViewController {
             newActivityId = previousActivity.idActivity + 1
         }
         
-        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: false)
+        
+        
+        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: activityHasScheduledTime.isOn ? scheduledTime : 0, realTime: realTime, isTerminated: false)
     }
     
     func updateActivityData(terminateActivity: Bool) {
