@@ -1,13 +1,8 @@
 #TODO
-Make a custom table view for home activities - DONE
-Make a normal table view for logs - DONE
-Connect the data of new activity to home activities (preparationsegue) - DONE
-Make and connect database - Done
-Make activities form home tappable to present the edit screen - DONE
-Add constraints to the edit activity - DONE
 Implement functions about timing
-End activity -DOne
-Reflect fields in edit activity - Done
-fix new and edit activity done button
+fix new and edit activity done button - In Progress
 remove end activity button from new activity
 Fix activity description text
+Fix zero activities bug - DONE
+Format time and duration to display hours and minutes
+Delete activity button

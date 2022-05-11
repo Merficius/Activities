@@ -9,16 +9,18 @@ class EditActivityController: UIViewController {
     @IBOutlet var activityRealTime: UIDatePicker!
     @IBOutlet var editActivityTitleLabel: UILabel!
     var controllerTitle: String = ""
-    var currentActivityId: Int64 = 0
+    var currentActivityId: Int64?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presentEditActivityView()
+        if currentActivityId != nil {
+            presentEditActivityView()
+        }
     }
 
     func presentEditActivityView() {
-        let currentActivity = Model.selectActivityById(currentActivityId)
+        let currentActivity = Model.selectActivityById(currentActivityId!)
         
         setTime(.estimated, minutes: Int(currentActivity.activityEstimatedTime))
         setTime(.scheduled, minutes: Int(currentActivity.activityScheduledTime))
@@ -51,7 +53,7 @@ class EditActivityController: UIViewController {
         let scheduledTime = calculateTime(.scheduled)
         let realTime = calculateTime(.real)
         
-        Model.updateRecordInDatabase(id: currentActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
+        Model.updateRecordInDatabase(id: currentActivityId!, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
     }
     
     func calculateTime(_ time: Time) -> Int64 {
