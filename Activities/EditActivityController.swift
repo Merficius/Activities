@@ -1,15 +1,15 @@
 import UIKit
 
 class EditActivityController: UIViewController {
-    @IBOutlet var activityName: UITextField!
-    @IBOutlet var activityDescription: UITextView!
-    @IBOutlet var activityEstimatedTime: UIDatePicker!
-    @IBOutlet var activityHasScheduledTime: UISwitch!
-    @IBOutlet var activityScheduledTime: UIDatePicker!
-    @IBOutlet var activityRealTime: UIDatePicker!
-    @IBOutlet var activityRealTimeLabel: UILabel!
-    @IBOutlet var editActivityTitleLabel: UILabel!
     @IBOutlet var endActivityButton: UIButton!
+    @IBOutlet var editActivityTitleLabel: UILabel!
+    @IBOutlet var activityNameTextField: UITextField!
+    @IBOutlet var activityDescriptionTextView: UITextView!
+    @IBOutlet var activityEstimatedTimeDatePicker: UIDatePicker!
+    @IBOutlet var activityHasScheduledTimeSwitch: UISwitch!
+    @IBOutlet var activityScheduledTimeDatePicker: UIDatePicker!
+    @IBOutlet var activityRealTimeLabel: UILabel!
+    @IBOutlet var activityRealTimeDatePicker: UIDatePicker!
     @IBOutlet var deleteActivityButton: UIButton!
     
     var controllerTitle: String = ""
@@ -23,7 +23,7 @@ class EditActivityController: UIViewController {
         if endActivityButtonIsHidden {
             endActivityButton.isHidden = true
             editActivityTitleLabel.textAlignment = .left
-            activityRealTime.isHidden = true
+            activityRealTimeDatePicker.isHidden = true
             activityRealTimeLabel.isHidden = true
             deleteActivityButton.isHidden = true
         }
@@ -40,11 +40,11 @@ class EditActivityController: UIViewController {
         setTime(.scheduled, seconds: Int(currentActivity.activityScheduledTime))
         setTime(.real, seconds: Int(currentActivity.activityRealTime))
         
-        activityName.text = currentActivity.activityName
+        activityNameTextField.text = currentActivity.activityName
 
-        activityDescription.text = currentActivity.activityDescription
+        activityDescriptionTextView.text = currentActivity.activityDescription
         
-        activityHasScheduledTime.isOn = currentActivity.activityScheduledTime != -1 ? true : false
+        activityHasScheduledTimeSwitch.isOn = currentActivity.activityScheduledTime != -1 ? true : false
     }
     
     func storeActivityData() {
@@ -57,7 +57,7 @@ class EditActivityController: UIViewController {
             newActivityId = previousActivity.idActivity + 1
         }
         
-        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: activityHasScheduledTime.isOn ? scheduledTime : -1, realTime: realTime, isTerminated: false)
+        Model.createRecordInDatabase(id: newActivityId, name: activityNameTextField.text!, description: activityDescriptionTextView.text!, estimatedTime: estimatedTime, scheduledTime: activityHasScheduledTimeSwitch.isOn ? scheduledTime : -1, realTime: realTime, isTerminated: false)
     }
     
     func updateActivityData(terminateActivity: Bool) {
@@ -65,7 +65,7 @@ class EditActivityController: UIViewController {
         let scheduledTime = calculateTime(.scheduled)
         let realTime = calculateTime(.real)
         
-        Model.updateRecordInDatabase(id: Model.currentActivityId!, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
+        Model.updateRecordInDatabase(id: Model.currentActivityId!, name: activityNameTextField.text!, description: activityDescriptionTextView.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
     }
     
     // Calculation about the time displayed
@@ -75,13 +75,13 @@ class EditActivityController: UIViewController {
         
         switch time {
         case .estimated:
-            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityEstimatedTime.date)
+            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityEstimatedTimeDatePicker.date)
             timeComponents.second = 0
         case .scheduled:
-            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityScheduledTime.date)
+            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityScheduledTimeDatePicker.date)
             timeComponents.second = 0
         case .real:
-            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityRealTime.date)
+            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityRealTimeDatePicker.date)
             if endActivityButtonIsHidden {
                 timeComponents.hour = 0
                 timeComponents.minute = 0
@@ -103,11 +103,11 @@ class EditActivityController: UIViewController {
        
         switch time {
         case .estimated:
-            activityEstimatedTime.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
+            activityEstimatedTimeDatePicker.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
         case .scheduled:
-            activityScheduledTime.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
+            activityScheduledTimeDatePicker.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
         case .real:
-            activityRealTime.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
+            activityRealTimeDatePicker.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
         }
     }
     

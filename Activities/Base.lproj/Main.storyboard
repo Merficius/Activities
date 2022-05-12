@@ -305,13 +305,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="Var-NQ-2qn"/>
                     <connections>
-                        <outlet property="activityDescription" destination="qXm-qk-yrE" id="xNa-A2-GzX"/>
-                        <outlet property="activityEstimatedTime" destination="9Ic-tG-PCW" id="FiF-Pa-g7d"/>
-                        <outlet property="activityHasScheduledTime" destination="yVX-W4-yhP" id="j9L-s2-THb"/>
-                        <outlet property="activityName" destination="Zxm-ma-Toe" id="0xS-2p-iHn"/>
-                        <outlet property="activityRealTime" destination="Zaj-V9-5FK" id="lfW-Yz-AJ1"/>
+                        <outlet property="activityDescriptionTextView" destination="qXm-qk-yrE" id="GES-m9-5eW"/>
+                        <outlet property="activityEstimatedTimeDatePicker" destination="9Ic-tG-PCW" id="ktE-Lh-ZsF"/>
+                        <outlet property="activityHasScheduledTimeSwitch" destination="yVX-W4-yhP" id="WaN-Bj-IqT"/>
+                        <outlet property="activityNameTextField" destination="Zxm-ma-Toe" id="qaV-lU-je6"/>
+                        <outlet property="activityRealTimeDatePicker" destination="Zaj-V9-5FK" id="o9m-C9-4Tm"/>
                         <outlet property="activityRealTimeLabel" destination="olo-7C-aKA" id="PtC-6Z-wAr"/>
-                        <outlet property="activityScheduledTime" destination="Mtc-0y-epR" id="k0C-15-SFC"/>
+                        <outlet property="activityScheduledTimeDatePicker" destination="Mtc-0y-epR" id="DuR-Mt-btX"/>
                         <outlet property="deleteActivityButton" destination="oAw-J0-5re" id="RaH-LE-4FG"/>
                         <outlet property="editActivityTitleLabel" destination="R6v-f5-jwz" id="gze-yg-tdX"/>
                         <outlet property="endActivityButton" destination="sOb-4V-QhT" id="LF1-G1-bcT"/>

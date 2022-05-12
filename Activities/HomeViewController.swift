@@ -37,24 +37,33 @@ class HomeViewController: UIViewController {
     }
     
     func startTimer(_ sender: UIButton) {
-        Model.scheduledTimers[sender.tag] = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel(sender:)), userInfo: sender.tag, repeats: true)
+        let buttonTag = sender.tag
+        
+        Model.scheduledTimers[buttonTag] = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(increaseRealTime(sender:)), userInfo: buttonTag, repeats: true)
     }
     
     func stopTimer(_ sender: UIButton) {
-        if let removedTimer = Model.scheduledTimers.removeValue(forKey: sender.tag) {
+        let buttonTag = sender.tag
+        
+        if let removedTimer = Model.scheduledTimers.removeValue(forKey: buttonTag) {
             removedTimer.invalidate()
         }
     }
     
+    // Used when deleting or ending activities
     func stopTimer(indexRow: Int) {
         if let removedTimer = Model.scheduledTimers.removeValue(forKey: indexRow) {
             removedTimer.invalidate()
         }
     }
     
-    @objc func updateTimerLabel(sender: Timer) {
-        Model.notTerminatedActivities[sender.userInfo as! Int].activityRealTime += 1
+    @objc func increaseRealTime(sender: Timer) {
+        let buttonTag = sender.userInfo as! Int
+        
+        Model.notTerminatedActivities[buttonTag].activityRealTime += 1
+        
         activitiesTableView.reloadData()
+        
         Model.save()
     }
     
