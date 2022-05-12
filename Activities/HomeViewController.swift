@@ -113,8 +113,10 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UITableViewDelegate {
+    
+    // Called when selection a cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Assigns the current activity to be the one selected
+        // Assigns the current activity id to be the one selected
         Model.currentActivityId = Model.notTerminatedActivities[indexPath.row].idActivity
         
         // Deselects the row and performs the segue to EditActivityController
@@ -124,18 +126,23 @@ extension HomeViewController: UITableViewDelegate {
 }
 
 extension HomeViewController: UITableViewDataSource {
+    
+    // Specifies the number of cells for the table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Model.notTerminatedActivities.count
     }
     
+    // Fills the data for the cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // returns a reusable cell for performance reasons
         let cell = activitiesTableView.dequeueReusableCell(withIdentifier: "ActivitiesTableViewCell", for: indexPath) as! ActivitiesTableViewCell
+        let currentCellActivity = Model.notTerminatedActivities[indexPath.row]
         
-        cell.ActivityNameLabel.text = Model.notTerminatedActivities[indexPath.row].activityName
+        cell.ActivityNameLabel.text = currentCellActivity.activityName
         
         //calculates time for string
         var calculatedString = ""
-        let seconds = Model.notTerminatedActivities[indexPath.row].activityRealTime
+        let seconds = currentCellActivity.activityRealTime
         calculatedString += String(format: "%02d:", seconds / 3600 % 24)
         calculatedString += String(format: "%02d:", seconds / 60 % 60)
         calculatedString += String(format: "%02d", seconds % 60)
@@ -146,7 +153,7 @@ extension HomeViewController: UITableViewDataSource {
         cell.ActivityControlButton.tag = indexPath.row
         
         // Changing appearance of button
-        if Model.notTerminatedActivities[indexPath.row].timerIsCounting {
+        if currentCellActivity.timerIsCounting {
             cell.ActivityControlButton.setImage(UIImage(systemName: "stop"), for: .normal)
             cell.ActivityControlButton.tintColor = UIColor.systemRed
             

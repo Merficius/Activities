@@ -8,7 +8,13 @@ class Model {
     // Data useful for controllers
     static var scheduledTimers = [Int: Timer]()
     static var currentActivityId: Int64?
-
+    static var currentActivity: Activity? {
+        if let currentActivityId = currentActivityId {
+            return selectActivityById(currentActivityId)
+        }
+        
+        return nil
+    }
 
     // Creates a record in database with all the fields as parameters
     static func createRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
