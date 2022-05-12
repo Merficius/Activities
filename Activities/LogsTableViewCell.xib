@@ -19,31 +19,31 @@
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="78" translatesAutoresizingMaskIntoConstraints="NO" id="azG-wD-1kp">
                         <rect key="frame" x="16" y="30" width="342" height="53"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZE-0t-ZlR">
-                                <rect key="frame" x="0.0" y="0.0" width="114" height="53"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZE-0t-ZlR">
+                                <rect key="frame" x="0.0" y="0.0" width="142.5" height="53"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gs6-pF-j5F">
-                                <rect key="frame" x="114" y="0.0" width="114" height="53"/>
+                                <rect key="frame" x="142.5" y="0.0" width="142.5" height="53"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Percentage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0Z-lT-R4k">
-                                <rect key="frame" x="228" y="0.0" width="114" height="53"/>
+                                <rect key="frame" x="285" y="0.0" width="57" height="53"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="O0Z-lT-R4k" firstAttribute="width" secondItem="azG-wD-1kp" secondAttribute="width" multiplier="1/3" id="IaZ-Xf-Vsa"/>
+                            <constraint firstItem="O0Z-lT-R4k" firstAttribute="width" secondItem="azG-wD-1kp" secondAttribute="width" multiplier="2/12" id="IaZ-Xf-Vsa"/>
                             <constraint firstItem="O0Z-lT-R4k" firstAttribute="leading" secondItem="gs6-pF-j5F" secondAttribute="trailing" id="It3-S0-mZI"/>
                             <constraint firstItem="gs6-pF-j5F" firstAttribute="leading" secondItem="bZE-0t-ZlR" secondAttribute="trailing" id="Y0o-LQ-Vah"/>
-                            <constraint firstItem="gs6-pF-j5F" firstAttribute="width" secondItem="azG-wD-1kp" secondAttribute="width" multiplier="1/3" id="aTU-Gx-Ls3"/>
-                            <constraint firstItem="bZE-0t-ZlR" firstAttribute="width" secondItem="azG-wD-1kp" secondAttribute="width" multiplier="1/3" id="efy-RK-Ope"/>
+                            <constraint firstItem="gs6-pF-j5F" firstAttribute="width" secondItem="azG-wD-1kp" secondAttribute="width" multiplier="5/12" id="aTU-Gx-Ls3"/>
+                            <constraint firstItem="bZE-0t-ZlR" firstAttribute="width" secondItem="azG-wD-1kp" secondAttribute="width" multiplier="5/12" id="efy-RK-Ope"/>
                             <constraint firstItem="bZE-0t-ZlR" firstAttribute="leading" secondItem="azG-wD-1kp" secondAttribute="leading" id="wn5-8i-ARQ"/>
                         </constraints>
                     </stackView>
