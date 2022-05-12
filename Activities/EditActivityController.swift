@@ -13,7 +13,6 @@ class EditActivityController: UIViewController {
     
     var controllerTitle: String = ""
     var endActivityButtonIsHidden = false
-    var currentActivityId: Int64?
     var currentCellIndex: IndexPath?
 
     override func viewDidLoad() {
@@ -27,13 +26,13 @@ class EditActivityController: UIViewController {
             activityRealTimeLabel.isHidden = true
         }
 
-        if currentActivityId != nil {
+        if Model.currentActivityId != nil {
             presentEditActivityView()
         }
     }
 
     func presentEditActivityView() {
-        let currentActivity = Model.selectActivityById(currentActivityId!)
+        let currentActivity = Model.selectActivityById(Model.currentActivityId!)
         
         setTime(.estimated, seconds: Int(currentActivity.activityEstimatedTime))
         setTime(.scheduled, seconds: Int(currentActivity.activityScheduledTime))
@@ -64,7 +63,7 @@ class EditActivityController: UIViewController {
         let scheduledTime = calculateTime(.scheduled)
         let realTime = calculateTime(.real)
         
-        Model.updateRecordInDatabase(id: currentActivityId!, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
+        Model.updateRecordInDatabase(id: Model.currentActivityId!, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
     }
     
     // Calculation about the time displayed
@@ -86,7 +85,7 @@ class EditActivityController: UIViewController {
                 timeComponents.minute = 0
                 timeComponents.second = 0
             } else {
-                timeComponents.second = Int(Model.selectActivityById(currentActivityId!).activityRealTime % 60)
+                timeComponents.second = Int(Model.selectActivityById(Model.currentActivityId!).activityRealTime % 60)
             }
         }
         
@@ -120,7 +119,7 @@ class EditActivityController: UIViewController {
     }
     
     @IBAction func deleteActivity(_ sender: UIButton) {
-        Model.deleteFromActivities(withId: currentActivityId!)
+        Model.deleteFromActivities(withId: Model.currentActivityId!)
     }
     
     enum Time {

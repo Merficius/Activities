@@ -5,7 +5,10 @@ import UIKit
 class Model {
     static var terminatedActivities: [Activity] = []
     static var notTerminatedActivities: [Activity] = []
+    // Data useful for controllers
     static var scheduledTimers = [Int: Timer]()
+    static var currentActivityId: Int64?
+
 
     // Creates a record in database with all the fields as parameters
     static func createRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
