@@ -13,7 +13,8 @@ class EditActivityController: UIViewController {
     var controllerTitle: String = ""
     var endActivityButtonIsHidden = false
     var currentActivityId: Int64?
-    
+    var currentCellIndex: IndexPath?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         editActivityTitleLabel.text = controllerTitle
