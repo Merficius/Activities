@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
         // Establishing the delegate and datasource of tableview to be this controller
         activitiesTableView.delegate = self
         activitiesTableView.dataSource = self
-        //        Model.deleteAllActivities()
+//                Model.deleteAllActivities()
     }
     
     // Executed each time that the view is placed in the hierarchy (more often than viewDidLoad)
@@ -111,7 +111,6 @@ class HomeViewController: UIViewController {
         if let editActivityController = unwindSegue.source as? EditActivityController {
             editActivityController.updateActivityData(terminateActivity: true)
             stopTimer(indexRow: editActivityController.currentCellIndex!.row)
-            //            print(Model.selectAllActivities(orderedBy: "idActivity"))
         }
     }
     

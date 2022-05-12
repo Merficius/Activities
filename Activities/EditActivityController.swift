@@ -13,8 +13,8 @@ class EditActivityController: UIViewController {
     @IBOutlet var deleteActivityButton: UIButton!
     
     var controllerType: ControllerType = .editActivity
-    var controllerTitle: String = ""
-    var endActivityButtonIsHidden = false
+    
+    // Used to stop timers when unwinding
     var currentCellIndex: IndexPath?
 
     override func viewDidLoad() {
@@ -34,18 +34,38 @@ class EditActivityController: UIViewController {
         }
     }
 
+    // Fills the data for the already created activity
     func presentEditActivityView() {
-        let currentActivity = Model.selectActivityById(Model.currentActivityId!)
-        
-        setTime(.estimated, seconds: Int(currentActivity.activityEstimatedTime))
-        setTime(.scheduled, seconds: Int(currentActivity.activityScheduledTime))
-        setTime(.real, seconds: Int(currentActivity.activityRealTime))
+        guard let currentActivity = Model.currentActivity else { return }
         
         activityNameTextField.text = currentActivity.activityName
 
         activityDescriptionTextView.text = currentActivity.activityDescription
         
+        setTimeForPicker(.estimated, seconds: Int(currentActivity.activityEstimatedTime))
+        
         activityHasScheduledTimeSwitch.isOn = currentActivity.activityScheduledTime != -1 ? true : false
+        setTimeForPicker(.scheduled, seconds: Int(currentActivity.activityScheduledTime))
+        
+        setTimeForPicker(.real, seconds: Int(currentActivity.activityRealTime))
+    }
+    
+    // Sets dates for date pickers based on seconds
+    func setTimeForPicker(_ datePickerType: DatePickerType, seconds: Int = 0) {
+        var timeComponents: DateComponents = DateComponents()
+        let modulusTime = Model.calculateModulusTime(seconds: seconds)
+        
+        timeComponents.hour = modulusTime.hours
+        timeComponents.minute = modulusTime.minutes
+       
+        switch datePickerType {
+        case .estimated:
+            activityEstimatedTimeDatePicker.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
+        case .scheduled:
+            activityScheduledTimeDatePicker.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
+        case .real:
+            activityRealTimeDatePicker.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
+        }
     }
     
     func storeActivityData() {
@@ -70,7 +90,7 @@ class EditActivityController: UIViewController {
     }
     
     // Calculation about the time displayed
-    func calculateTime(_ time: Time) -> Int64 {
+    func calculateTime(_ time: DatePickerType) -> Int64 {
         var timeComponents: DateComponents
         var totalTime: Int64
         
@@ -97,21 +117,6 @@ class EditActivityController: UIViewController {
         return totalTime
     }
     
-    func setTime(_ time: Time, seconds: Int = 0) {
-        var timeComponents: DateComponents = DateComponents()
-        timeComponents.hour = seconds / 3600 % 24
-        timeComponents.minute = seconds / 60 % 60
-       
-        switch time {
-        case .estimated:
-            activityEstimatedTimeDatePicker.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
-        case .scheduled:
-            activityScheduledTimeDatePicker.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
-        case .real:
-            activityRealTimeDatePicker.setDate(Calendar.current.date(from: timeComponents)!, animated: false)
-        }
-    }
-    
     // Used in tabbar
     func navigateToHome() {
         
@@ -121,7 +126,7 @@ class EditActivityController: UIViewController {
         Model.deleteFromActivities(withId: Model.currentActivityId!)
     }
     
-    enum Time {
+    enum DatePickerType {
         case estimated
         case scheduled
         case real

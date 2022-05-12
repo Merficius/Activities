@@ -131,13 +131,23 @@ class Model {
     // Calculates the string to be placed in the home and logs duration field labels
     static func calculateTimeString(for activity: Activity) -> String {
         var calculatedString = ""
-        
         let seconds = activity.activityRealTime
-        calculatedString += String(format: "%02d:", seconds / 3600 % 24)
-        calculatedString += String(format: "%02d:", seconds / 60 % 60)
-        calculatedString += String(format: "%02d", seconds % 60)
+        let modulusTime = calculateModulusTime(seconds: Int(seconds))
+        
+        calculatedString += String(format: "%02d:%02d:%02d", modulusTime.hours, modulusTime.minutes, modulusTime.seconds)
        
         return calculatedString
+    }
+    
+    // Convers the seconds to hours, minutes and seconds to be appropiate for format 00:00:00
+    static func calculateModulusTime(seconds: Int) -> (hours: Int, minutes: Int, seconds: Int) {
+        let time: (hours: Int, minutes: Int, seconds: Int)
+        
+        time.hours = seconds / 3600 % 24
+        time.minutes = seconds / 60 % 60
+        time.seconds = seconds % 60
+        
+        return time
     }
 }
 
