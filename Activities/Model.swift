@@ -150,10 +150,19 @@ class Model {
         return time
     }
     
+    // Calculates the total time in seconds from a tuple of hours, minutes and seconds
     static func calculateTotalTime(from time: (hours: Int, minutes: Int, seconds: Int)) -> Int {
         let totalTime = time.hours * 3600 + time.minutes * 60 + time.seconds
         
         return totalTime
+    }
+    
+    // Calculates the percentage of the given seconds in a day and returns a ready to use string
+    static func calculatePercentage(ofSeconds seconds: Double) -> String {
+        let percentage = seconds * 100 / 86_400
+        let percentageString = String(format: "%.1f%", percentage)
+        
+        return percentageString
     }
 }
 

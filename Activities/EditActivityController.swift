@@ -68,7 +68,7 @@ class EditActivityController: UIViewController {
         }
     }
     
-    // Stores the created activity (.newActivity) in the database
+    // Stores the created activity (.newActivity) in the database when tapping the done button
     func storeActivityData() {
         var newActivityId: Int64 = 0
         let estimatedTime = getTimeFrom(picker: .estimated)
@@ -80,6 +80,15 @@ class EditActivityController: UIViewController {
         }
         
         Model.createRecordInDatabase(id: newActivityId, name: activityNameTextField.text!, description: activityDescriptionTextView.text!, estimatedTime: estimatedTime, scheduledTime: activityHasScheduledTimeSwitch.isOn ? scheduledTime : -1, realTime: realTime, isTerminated: false)
+    }
+    
+    // Updates the activity (.editActivity) in the database when tapping the done button
+    func updateActivityData(terminateActivity: Bool) {
+        let estimatedTime = getTimeFrom(picker: .estimated)
+        let scheduledTime = getTimeFrom(picker: .scheduled)
+        let realTime = getTimeFrom(picker: .real)
+        
+        Model.updateRecordInDatabase(id: Model.currentActivityId!, name: activityNameTextField.text!, description: activityDescriptionTextView.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
     }
     
     // Gets the time in seconds from the given picker
@@ -113,14 +122,6 @@ class EditActivityController: UIViewController {
         totalTime = Int64(Model.calculateTotalTime(from: timeComponentsTuple))
         
         return totalTime
-    }
-    
-    func updateActivityData(terminateActivity: Bool) {
-        let estimatedTime = getTimeFrom(picker: .estimated)
-        let scheduledTime = getTimeFrom(picker: .scheduled)
-        let realTime = getTimeFrom(picker: .real)
-        
-        Model.updateRecordInDatabase(id: Model.currentActivityId!, name: activityNameTextField.text!, description: activityDescriptionTextView.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
     }
     
     // Used in tabbar
