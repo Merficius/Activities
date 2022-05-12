@@ -127,6 +127,18 @@ class Model {
         
         save()
     }
+    
+    // Calculates the string to be placed in the home and logs duration field
+    static func calculateTimeString(for activity: Activity) -> String {
+        var calculatedString = ""
+        
+        let seconds = activity.activityRealTime
+        calculatedString += String(format: "%02d:", seconds / 3600 % 24)
+        calculatedString += String(format: "%02d:", seconds / 60 % 60)
+        calculatedString += String(format: "%02d", seconds % 60)
+       
+        return calculatedString
+    }
 }
 
 extension Model {

@@ -3,7 +3,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet var activitiesTableView: UITableView!
-    var cellsLoadedForTheFirstTime = false
+    var cellIsLoadedForTheFirstTime = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,37 +137,34 @@ extension HomeViewController: UITableViewDataSource {
         // returns a reusable cell for performance reasons
         let cell = activitiesTableView.dequeueReusableCell(withIdentifier: "ActivitiesTableViewCell", for: indexPath) as! ActivitiesTableViewCell
         let currentCellActivity = Model.notTerminatedActivities[indexPath.row]
+        let currentCellControlButton: UIButton = cell.ActivityControlButton
         
         cell.ActivityNameLabel.text = currentCellActivity.activityName
-        
-        //calculates time for string
-        var calculatedString = ""
-        let seconds = currentCellActivity.activityRealTime
-        calculatedString += String(format: "%02d:", seconds / 3600 % 24)
-        calculatedString += String(format: "%02d:", seconds / 60 % 60)
-        calculatedString += String(format: "%02d", seconds % 60)
-        cell.ActivityDurationLabel.text = calculatedString
+        cell.ActivityDurationLabel.text = Model.calculateTimeString(for: currentCellActivity)
         
         // Allows to perform a function when the button of a cell is tapped
-        cell.ActivityControlButton.addTarget(self, action: #selector(connected(sender:)), for: .touchUpInside)
-        cell.ActivityControlButton.tag = indexPath.row
+        currentCellControlButton.addTarget(self, action: #selector(connected(sender:)), for: .touchUpInside)
+        currentCellControlButton.tag = indexPath.row
         
         // Changing appearance of button
         if currentCellActivity.timerIsCounting {
-            cell.ActivityControlButton.setImage(UIImage(systemName: "stop"), for: .normal)
-            cell.ActivityControlButton.tintColor = UIColor.systemRed
+            // If the play button is active
+            currentCellControlButton.setImage(UIImage(systemName: "stop"), for: .normal)
+            currentCellControlButton.tintColor = UIColor.systemRed
             
-            if !cellsLoadedForTheFirstTime {
+            // Used when we exit the app and then we come back
+            if !cellIsLoadedForTheFirstTime {
                 startTimer(cell.ActivityControlButton)
             }
         } else {
-            cell.ActivityControlButton.setImage(UIImage(systemName: "play"), for: .normal)
-            cell.ActivityControlButton.tintColor = UIColor.systemGreen
+            // If the stop button is active
+            currentCellControlButton.setImage(UIImage(systemName: "play"), for: .normal)
+            currentCellControlButton.tintColor = UIColor.systemGreen
         }
         
         if indexPath.row == Model.notTerminatedActivities.count - 1 {
             // Assigns true at the end of constructing the last cell
-            cellsLoadedForTheFirstTime = true
+            cellIsLoadedForTheFirstTime = true
         }
         
         return cell
