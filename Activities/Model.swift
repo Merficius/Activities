@@ -41,6 +41,22 @@ class Model {
         save()
     }
     
+    static func updateRecordInDatabase(id: Int64, startTimerDate: Date?) {
+        let activity = selectActivityById(id)
+    
+        activity.startTimerDate = startTimerDate
+        
+        save()
+    }
+    
+    static func updateRecordInDatabase(id: Int64, stopTimerDate: Date?) {
+        let activity = selectActivityById(id)
+    
+        activity.startTimerDate = stopTimerDate
+        
+        save()
+    }
+    
     static func deleteRecordInDatabase(withId idActivity: Int64) {
         var managedObject: Activity
         

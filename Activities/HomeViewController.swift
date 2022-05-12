@@ -48,11 +48,16 @@ class HomeViewController: UIViewController {
     }
     
     func startTimer(_ sender: UIButton) {
+        
         scheduledTimers[sender.tag] = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel(sender:)), userInfo: sender.tag, repeats: true)
     }
     
     @objc func updateTimerLabel(sender: Timer) {
-        Model.notTerminatedActivities[sender.userInfo as! Int].activityRealTime += 1
+        Model.notTerminatedActivities[sender.userInfo as! Int].activityRealTime = Int64(Date().timeIntervalSince(Model.notTerminatedActivities[sender.userInfo as! Int].startTimerDate!))
+        print(Model.notTerminatedActivities[sender.userInfo as! Int].startTimerDate!)
+        if let stopTimerDate = Model.notTerminatedActivities[sender.userInfo as! Int].stopTimerDate {
+            print(Int64(Date().timeIntervalSince(stopTimerDate)))
+        }
         activitiesTableView.reloadData()
         Model.save()
 //        print(scheduledTimers.keys)
@@ -166,9 +171,23 @@ extension HomeViewController: UITableViewDataSource {
     // Function that the button does when tapped
     @objc func connected(sender: UIButton){
         let buttonTag = sender.tag
+        let idActivity = Model.notTerminatedActivities[buttonTag].idActivity
         
         Model.notTerminatedActivities[buttonTag].timerIsCounting.toggle()
         Model.notTerminatedActivities[buttonTag].timerIsCounting ? startTimer(sender) : stopTimer(sender)
+        
+        if Model.notTerminatedActivities[buttonTag].timerIsCounting {
+            Model.updateRecordInDatabase(id: idActivity, stopTimerDate: Date())
+        } else {
+            if let stopTimerDate = Model.notTerminatedActivities[buttonTag].stopTimerDate {
+                let restartTime = Date().addingTimeInterval(stopTimerDate.timeIntervalSince(Model.notTerminatedActivities[buttonTag].startTimerDate!))
+                Model.updateRecordInDatabase(id: idActivity, stopTimerDate: nil)
+                Model.updateRecordInDatabase(id: idActivity, startTimerDate: restartTime)
+            } else {
+                Model.updateRecordInDatabase(id: idActivity, startTimerDate: Date())
+            }
+        }
+        
         Model.save()
         
         activitiesTableView.reloadData()

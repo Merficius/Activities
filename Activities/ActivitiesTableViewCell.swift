@@ -12,6 +12,7 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet var ActivityNameLabel: UILabel!
     @IBOutlet var ActivityDurationLabel: UILabel!
     @IBOutlet var ActivityControlButton: UIButton!
+    var firstTapControlButton = false
     
     
     override func awakeFromNib() {
