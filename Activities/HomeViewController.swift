@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
         activitiesTableView.register(nib, forCellReuseIdentifier: "ActivitiesTableViewCell")
         activitiesTableView.delegate = self
         activitiesTableView.dataSource = self
-//        Model.deleteAllActivities()
+        //        Model.deleteAllActivities()
     }
     
     // Executed each time that the view is placed in the hierarchy (more often than viewDidLoad)
@@ -27,11 +27,11 @@ class HomeViewController: UIViewController {
     func readNotTerminatedActivities() {
         Model.notTerminatedActivities = Model.selectAllNotTerminatedActivities()
         
-        activitiesTableView.reloadData()
+        presentHomeView()
     }
     
     func presentHomeView() {
-        
+        activitiesTableView.reloadData()
     }
     
     func startTimer(_ sender: UIButton) {
@@ -46,9 +46,8 @@ class HomeViewController: UIViewController {
     
     @objc func updateTimerLabel(sender: Timer) {
         Model.notTerminatedActivities[sender.userInfo as! Int].activityRealTime += 1
-        activitiesTableView.reloadData()
+        presentHomeView()
         Model.save()
-//        print(scheduledTimers.keys)
     }
     
     func stopTimer(indexRow: Int) {
@@ -115,6 +114,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Assigns the current activity to be the one selected
         Model.currentActivityId = Model.notTerminatedActivities[indexPath.row].idActivity
         
         // Deselects the row and performs the segue to EditActivityController
@@ -176,6 +176,6 @@ extension HomeViewController: UITableViewDataSource {
         
         Model.save()
         
-        activitiesTableView.reloadData()
+        presentHomeView()
     }
 }
