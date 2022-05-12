@@ -12,23 +12,24 @@ class EditActivityController: UIViewController {
     @IBOutlet var activityRealTimeDatePicker: UIDatePicker!
     @IBOutlet var deleteActivityButton: UIButton!
     
+    var controllerType: ControllerType = .editActivity
     var controllerTitle: String = ""
     var endActivityButtonIsHidden = false
     var currentCellIndex: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        editActivityTitleLabel.text = controllerTitle
+        editActivityTitleLabel.text = controllerType == .newActivity ? "New Activity" : "Edit Activity"
         
-        if endActivityButtonIsHidden {
+        if controllerType == .newActivity {
             endActivityButton.isHidden = true
             editActivityTitleLabel.textAlignment = .left
-            activityRealTimeDatePicker.isHidden = true
+            
             activityRealTimeLabel.isHidden = true
+            activityRealTimeDatePicker.isHidden = true
+            
             deleteActivityButton.isHidden = true
-        }
-
-        if Model.currentActivityId != nil {
+        } else {
             presentEditActivityView()
         }
     }
@@ -82,7 +83,7 @@ class EditActivityController: UIViewController {
             timeComponents.second = 0
         case .real:
             timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityRealTimeDatePicker.date)
-            if endActivityButtonIsHidden {
+            if controllerType == .newActivity {
                 timeComponents.hour = 0
                 timeComponents.minute = 0
                 timeComponents.second = 0
@@ -111,13 +112,9 @@ class EditActivityController: UIViewController {
         }
     }
     
+    // Used in tabbar
     func navigateToHome() {
         
-    }
-    
-    // Dismisses keyboard when the user touches outside of it
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
     }
     
     @IBAction func deleteActivity(_ sender: UIButton) {
@@ -128,6 +125,16 @@ class EditActivityController: UIViewController {
         case estimated
         case scheduled
         case real
+    }
+    
+    enum ControllerType {
+        case newActivity
+        case editActivity
+    }
+    
+    // Dismisses keyboard when the user touches outside of it
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 

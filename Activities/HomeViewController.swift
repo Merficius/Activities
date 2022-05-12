@@ -73,11 +73,10 @@ class HomeViewController: UIViewController {
         
         if let _ = sender as? UIButton {
             // If the sender is a button then it is a new activity
-            editActivityController.controllerTitle = "New Activity"
-            editActivityController.endActivityButtonIsHidden = true
+            editActivityController.controllerType = .newActivity
         } else if let sender = sender as? UITableView {
             // if the sender is a tableview then it is an edit activity
-            editActivityController.controllerTitle = "Edit Activity"
+            editActivityController.controllerType = .editActivity
             editActivityController.currentCellIndex = sender.indexPathForSelectedRow
         }
     }
