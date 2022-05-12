@@ -62,16 +62,22 @@ class HomeViewController: UIViewController {
         guard let editActivityController = segue.destination as? EditActivityController else { return }
         
         if let _ = sender as? UIButton {
+            // If the sender is a button then it is a new activity
             editActivityController.controllerTitle = "New Activity"
             editActivityController.endActivityButtonIsHidden = true
         } else if let sender = sender as? UITableView {
+            // if the sender is a tableview then it is an edit activity
             editActivityController.controllerTitle = "Edit Activity"
             editActivityController.currentCellIndex = sender.indexPathForSelectedRow
         }
     }
     
-    @IBAction func navigateToEditActivity(_ sender: UIButton) {
-        performSegue(withIdentifier: "NewActivity", sender: sender)
+    @IBAction func navigateToEditActivity(_ sender: Any) {
+        if let _ = sender as? UIButton {
+            performSegue(withIdentifier: "NewActivity", sender: sender)
+        } else if let _ = sender as? UITableView {
+            performSegue(withIdentifier: "EditActivity", sender: sender)
+        }
     }
     
     func navigateToLogs() {
@@ -112,7 +118,7 @@ extension HomeViewController: UITableViewDelegate {
         Model.currentActivityId = Model.notTerminatedActivities[indexPath.row].idActivity
         
         // Deselects the row and performs the segue to EditActivityController
-        performSegue(withIdentifier: "EditActivity", sender: tableView)
+        navigateToEditActivity(tableView)
         activitiesTableView.deselectRow(at: indexPath, animated: false)
     }
 }
