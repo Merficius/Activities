@@ -1,7 +1,7 @@
 #TODO
-Implement functions about timing - In progress
 Format time and duration to display hours and minutes in activities
 Format time and duration to display hours and minutes in logs
+Seconds are not counted correctly when closing the app
 
 
 

@@ -89,7 +89,7 @@ class HomeViewController: UIViewController {
             } else if editActivityController.editActivityTitleLabel.text == "New Activity" {
                 editActivityController.storeActivityData()
             }
-            //            print(Model.selectAllActivities(orderedBy: "idActivity"))
+//                        print(Model.selectAllActivities(orderedBy: "idActivity"))
         }
     }
     
