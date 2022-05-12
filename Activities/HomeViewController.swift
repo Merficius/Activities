@@ -30,6 +30,10 @@ class HomeViewController: UIViewController {
         activitiesTableView.reloadData()
     }
     
+    func presentHomeView() {
+        
+    }
+    
     func startTimer(_ sender: UIButton) {
         Model.scheduledTimers[sender.tag] = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel(sender:)), userInfo: sender.tag, repeats: true)
     }
@@ -40,6 +44,20 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @objc func updateTimerLabel(sender: Timer) {
+        Model.notTerminatedActivities[sender.userInfo as! Int].activityRealTime += 1
+        activitiesTableView.reloadData()
+        Model.save()
+//        print(scheduledTimers.keys)
+    }
+    
+    func stopTimer(indexRow: Int) {
+        if let removedTimer = Model.scheduledTimers.removeValue(forKey: indexRow) {
+            removedTimer.invalidate()
+        }
+    }
+    
+    // Preparing to navigate to editActivityController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let editActivityController = segue.destination as? EditActivityController else { return }
         
@@ -56,28 +74,11 @@ class HomeViewController: UIViewController {
         performSegue(withIdentifier: "NewActivity", sender: sender)
     }
     
-    func presentHomeView() {
-        
-    }
-    
-    @objc func updateTimerLabel(sender: Timer) {
-        Model.notTerminatedActivities[sender.userInfo as! Int].activityRealTime += 1
-        activitiesTableView.reloadData()
-        Model.save()
-//        print(scheduledTimers.keys)
-    }
-    
-    func stopTimer(indexRow: Int) {
-        if let removedTimer = Model.scheduledTimers.removeValue(forKey: indexRow) {
-            removedTimer.invalidate()
-        }
-    }
-    
     func navigateToLogs() {
         
     }
     
-    // Used when the user taps the done button
+    // Called when the user taps the done button
     @IBAction func unwindWhenDone(unwindSegue: UIStoryboardSegue) {
         if let editActivityController = unwindSegue.source as? EditActivityController {
             
@@ -89,7 +90,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    // Used when the user taps the end activity button
+    // Called when the user taps the end activity button
     @IBAction func unwindWhenEnded(unwindSegue: UIStoryboardSegue) {
         if let editActivityController = unwindSegue.source as? EditActivityController {
             editActivityController.updateActivityData(terminateActivity: true)
@@ -98,6 +99,7 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // Called when the user taps the delete button
     @IBAction func unwindWhenDeleted(unwindSegue: UIStoryboardSegue) {
         if let editActivityController = unwindSegue.source as? EditActivityController {
             stopTimer(indexRow: editActivityController.currentCellIndex!.row)
@@ -151,8 +153,7 @@ extension HomeViewController: UITableViewDataSource {
         }
         
         if indexPath.row == Model.notTerminatedActivities.count - 1 {
-//            print(indexPath.row, Model.notTerminatedActivities.count - 1)
-            // Assigns true at the end of constructing all the cells
+            // Assigns true at the end of constructing the last cell
             cellsLoadedForTheFirstTime = true
         }
         
@@ -162,9 +163,11 @@ extension HomeViewController: UITableViewDataSource {
     // Function that the button does when tapped
     @objc func connected(sender: UIButton){
         let buttonTag = sender.tag
+        var timerIsCounting = Model.notTerminatedActivities[buttonTag].timerIsCounting
         
-        Model.notTerminatedActivities[buttonTag].timerIsCounting.toggle()
-        Model.notTerminatedActivities[buttonTag].timerIsCounting ? startTimer(sender) : stopTimer(sender)
+        timerIsCounting.toggle()
+        timerIsCounting ? startTimer(sender) : stopTimer(sender)
+        
         Model.save()
         
         activitiesTableView.reloadData()
