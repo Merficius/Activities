@@ -10,6 +10,7 @@ class EditActivityController: UIViewController {
     @IBOutlet var activityRealTimeLabel: UILabel!
     @IBOutlet var editActivityTitleLabel: UILabel!
     @IBOutlet var endActivityButton: UIButton!
+    @IBOutlet var deleteActivityButton: UIButton!
     
     var controllerTitle: String = ""
     var endActivityButtonIsHidden = false
@@ -24,6 +25,7 @@ class EditActivityController: UIViewController {
             editActivityTitleLabel.textAlignment = .left
             activityRealTime.isHidden = true
             activityRealTimeLabel.isHidden = true
+            deleteActivityButton.isHidden = true
         }
 
         if Model.currentActivityId != nil {
