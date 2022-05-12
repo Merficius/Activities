@@ -7,6 +7,7 @@ class EditActivityController: UIViewController {
     @IBOutlet var activityHasScheduledTime: UISwitch!
     @IBOutlet var activityScheduledTime: UIDatePicker!
     @IBOutlet var activityRealTime: UIDatePicker!
+    @IBOutlet var activityRealTimeLabel: UILabel!
     @IBOutlet var editActivityTitleLabel: UILabel!
     @IBOutlet var endActivityButton: UIButton!
     
@@ -22,6 +23,8 @@ class EditActivityController: UIViewController {
         if endActivityButtonIsHidden {
             endActivityButton.isHidden = true
             editActivityTitleLabel.textAlignment = .left
+            activityRealTime.isHidden = true
+            activityRealTimeLabel.isHidden = true
         }
 
         if currentActivityId != nil {
@@ -76,6 +79,10 @@ class EditActivityController: UIViewController {
             timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityScheduledTime.date)
         case .real:
             timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityRealTime.date)
+            if endActivityButtonIsHidden {
+                timeComponents.hour = 0
+                timeComponents.minute = 0
+            }
         }
         
         totalTime = Int64(timeComponents.hour! * 3600 + timeComponents.minute! * 60)
