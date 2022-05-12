@@ -55,7 +55,7 @@ class HomeViewController: UIViewController {
         Model.notTerminatedActivities[sender.userInfo as! Int].activityRealTime += 1
         activitiesTableView.reloadData()
         Model.save()
-        print(scheduledTimers.keys)
+//        print(scheduledTimers.keys)
     }
     
     func stopTimer(_ sender: UIButton) {
@@ -128,7 +128,14 @@ extension HomeViewController: UITableViewDataSource {
         let cell = activitiesTableView.dequeueReusableCell(withIdentifier: "ActivitiesTableViewCell", for: indexPath) as! ActivitiesTableViewCell
         
         cell.ActivityNameLabel.text = Model.notTerminatedActivities[indexPath.row].activityName
-        cell.ActivityDurationLabel.text = String(Model.notTerminatedActivities[indexPath.row].activityRealTime)
+        
+        //calculates time for string
+        var calculatedString = ""
+        let seconds = Model.notTerminatedActivities[indexPath.row].activityRealTime
+        calculatedString += String(format: "%02d:", seconds / 3600 % 24)
+        calculatedString += String(format: "%02d:", seconds / 60 % 60)
+        calculatedString += String(format: "%02d", seconds % 60)
+        cell.ActivityDurationLabel.text = calculatedString
         
         // Allows to perform a function when the button of a cell is tapped
         cell.ActivityControlButton.addTarget(self, action: #selector(connected(sender:)), for: .touchUpInside)
@@ -148,7 +155,7 @@ extension HomeViewController: UITableViewDataSource {
         }
         
         if indexPath.row == Model.notTerminatedActivities.count - 1 {
-            print(indexPath.row, Model.notTerminatedActivities.count - 1)
+//            print(indexPath.row, Model.notTerminatedActivities.count - 1)
             // Assigns true at the end of constructing all the cells
             isInitialized = true
         }

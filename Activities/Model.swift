@@ -35,7 +35,7 @@ class Model {
         activity.activityDescription = description
         activity.activityEstimatedTime = estimatedTime
         activity.activityScheduledTime = scheduledTime
-        activity.activityRealTime = realTime
+        //activity.activityRealTime = realTime
         activity.activityIsTerminated = isTerminated
         
         save()

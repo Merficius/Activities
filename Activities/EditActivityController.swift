@@ -32,15 +32,15 @@ class EditActivityController: UIViewController {
     func presentEditActivityView() {
         let currentActivity = Model.selectActivityById(currentActivityId!)
         
-        setTime(.estimated, minutes: Int(currentActivity.activityEstimatedTime))
-        setTime(.scheduled, minutes: Int(currentActivity.activityScheduledTime))
-        setTime(.real, minutes: Int(currentActivity.activityRealTime))
+        setTime(.estimated, seconds: Int(currentActivity.activityEstimatedTime))
+        setTime(.scheduled, seconds: Int(currentActivity.activityScheduledTime))
+        setTime(.real, seconds: Int(currentActivity.activityRealTime))
         
         activityName.text = currentActivity.activityName
 
         activityDescription.text = currentActivity.activityDescription
         
-        activityHasScheduledTime.isOn = currentActivity.activityScheduledTime != 0 ? true : false
+        activityHasScheduledTime.isOn = currentActivity.activityScheduledTime != -1 ? true : false
     }
     
     func storeActivityData() {
@@ -53,7 +53,7 @@ class EditActivityController: UIViewController {
             newActivityId = previousActivity.idActivity + 1
         }
         
-        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: activityHasScheduledTime.isOn ? scheduledTime : 0, realTime: realTime, isTerminated: false)
+        Model.createRecordInDatabase(id: newActivityId, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: activityHasScheduledTime.isOn ? scheduledTime : -1, realTime: realTime, isTerminated: false)
     }
     
     func updateActivityData(terminateActivity: Bool) {
@@ -64,6 +64,7 @@ class EditActivityController: UIViewController {
         Model.updateRecordInDatabase(id: currentActivityId!, name: activityName.text!, description: activityDescription.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
     }
     
+    // Calculation about the time displayed
     func calculateTime(_ time: Time) -> Int64 {
         var timeComponents: DateComponents
         var totalTime: Int64
@@ -77,15 +78,15 @@ class EditActivityController: UIViewController {
             timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityRealTime.date)
         }
         
-        totalTime = Int64(timeComponents.hour! * 60 + timeComponents.minute!)
+        totalTime = Int64(timeComponents.hour! * 3600 + timeComponents.minute! * 60)
         
         return totalTime
     }
     
-    func setTime(_ time: Time, minutes: Int = 0) {
+    func setTime(_ time: Time, seconds: Int = 0) {
         var timeComponents: DateComponents = DateComponents()
-        timeComponents.hour = minutes / 60
-        timeComponents.minute = minutes % 60
+        timeComponents.hour = seconds / 3600 % 24
+        timeComponents.minute = seconds / 60 % 60
        
         switch time {
         case .estimated:
