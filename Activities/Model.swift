@@ -128,7 +128,7 @@ class Model {
         save()
     }
     
-    // Calculates the string to be placed in the home and logs duration field
+    // Calculates the string to be placed in the home and logs duration field labels
     static func calculateTimeString(for activity: Activity) -> String {
         var calculatedString = ""
         

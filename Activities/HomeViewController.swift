@@ -21,17 +21,16 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        readNotTerminatedActivities()
-    }
-    
-    func readNotTerminatedActivities() {
-        Model.notTerminatedActivities = Model.selectAllNotTerminatedActivities()
-        
         presentHomeView()
     }
     
     func presentHomeView() {
+        readNotTerminatedActivities()
         activitiesTableView.reloadData()
+    }
+    
+    func readNotTerminatedActivities() {
+        Model.notTerminatedActivities = Model.selectAllNotTerminatedActivities()
     }
     
     func startTimer(_ sender: UIButton) {
@@ -44,16 +43,16 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @objc func updateTimerLabel(sender: Timer) {
-        Model.notTerminatedActivities[sender.userInfo as! Int].activityRealTime += 1
-        presentHomeView()
-        Model.save()
-    }
-    
     func stopTimer(indexRow: Int) {
         if let removedTimer = Model.scheduledTimers.removeValue(forKey: indexRow) {
             removedTimer.invalidate()
         }
+    }
+    
+    @objc func updateTimerLabel(sender: Timer) {
+        Model.notTerminatedActivities[sender.userInfo as! Int].activityRealTime += 1
+        activitiesTableView.reloadData()
+        Model.save()
     }
     
     // Preparing to navigate to editActivityController
@@ -79,6 +78,7 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // Used in tabbar
     func navigateToLogs() {
         
     }
@@ -154,7 +154,7 @@ extension HomeViewController: UITableViewDataSource {
             
             // Used when we exit the app and then we come back
             if !cellIsLoadedForTheFirstTime {
-                startTimer(cell.ActivityControlButton)
+                startTimer(currentCellControlButton)
             }
         } else {
             // If the stop button is active
@@ -173,13 +173,13 @@ extension HomeViewController: UITableViewDataSource {
     // Function that the button does when tapped
     @objc func connected(sender: UIButton){
         let buttonTag = sender.tag
-        var timerIsCounting = Model.notTerminatedActivities[buttonTag].timerIsCounting
+        let currentButtonActivity = Model.notTerminatedActivities[buttonTag]
         
-        timerIsCounting.toggle()
-        timerIsCounting ? startTimer(sender) : stopTimer(sender)
+        currentButtonActivity.timerIsCounting.toggle()
+        currentButtonActivity.timerIsCounting ? startTimer(sender) : stopTimer(sender)
         
         Model.save()
         
-        presentHomeView()
+        activitiesTableView.reloadData()
     }
 }
