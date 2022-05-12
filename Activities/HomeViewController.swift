@@ -3,13 +3,12 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet var activitiesTableView: UITableView!
-    var isInitialized = false
+    var cellsLoadedForTheFirstTime = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Model.initialize()
-        readNotTerminatedActivities()
         
         let nib = UINib(nibName: "ActivitiesTableViewCell", bundle: nil)
         activitiesTableView.register(nib, forCellReuseIdentifier: "ActivitiesTableViewCell")
@@ -18,6 +17,7 @@ class HomeViewController: UIViewController {
 //        Model.deleteAllActivities()
     }
     
+    // Executed each time that the view is placed in the hierarchy (more often than viewDidLoad)
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -72,7 +72,7 @@ class HomeViewController: UIViewController {
     }
     
     func readNotTerminatedActivities() {
-        Model.selectAllNotTerminatedActivities()
+        Model.notTerminatedActivities = Model.selectAllNotTerminatedActivities()
         
         activitiesTableView.reloadData()
     }
@@ -143,7 +143,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.ActivityControlButton.setImage(UIImage(systemName: "stop"), for: .normal)
             cell.ActivityControlButton.tintColor = UIColor.systemRed
             
-            if !isInitialized {
+            if !cellsLoadedForTheFirstTime {
                 startTimer(cell.ActivityControlButton)
             }
         } else {
@@ -154,7 +154,7 @@ extension HomeViewController: UITableViewDataSource {
         if indexPath.row == Model.notTerminatedActivities.count - 1 {
 //            print(indexPath.row, Model.notTerminatedActivities.count - 1)
             // Assigns true at the end of constructing all the cells
-            isInitialized = true
+            cellsLoadedForTheFirstTime = true
         }
         
         return cell

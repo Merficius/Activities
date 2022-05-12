@@ -24,7 +24,7 @@ class LogsController: UIViewController {
     }
 
     func readTerminatedActivities() {
-        Model.selectAllTerminatedActivities()
+        Model.terminatedActivities = Model.selectAllTerminatedActivities()
         logsTableView.reloadData()
     }
     

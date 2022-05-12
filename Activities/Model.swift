@@ -38,8 +38,6 @@ class Model {
         fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == true")
         arrayOfManagedObjects = executeFetch()
         
-        terminatedActivities = arrayOfManagedObjects
-        
         return arrayOfManagedObjects
     }
     
@@ -50,8 +48,6 @@ class Model {
         fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
         fetchRequest.predicate = NSPredicate(format: "activityIsTerminated == false")
         arrayOfManagedObjects = executeFetch()
-        
-        notTerminatedActivities = arrayOfManagedObjects
         
         return arrayOfManagedObjects
     }
