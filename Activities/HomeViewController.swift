@@ -10,8 +10,11 @@ class HomeViewController: UIViewController {
         
         Model.initialize()
         
+        // Register the nib file so that we can use it to construct our cells
         let nib = UINib(nibName: "ActivitiesTableViewCell", bundle: nil)
         activitiesTableView.register(nib, forCellReuseIdentifier: "ActivitiesTableViewCell")
+        
+        // Establishing the delegate and datasource of tableview to be this controller
         activitiesTableView.delegate = self
         activitiesTableView.dataSource = self
         //        Model.deleteAllActivities()
