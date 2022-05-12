@@ -118,7 +118,7 @@
                                             <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <segue destination="3r8-6b-QEu" kind="unwind" unwindAction="endActivityUnwindWithUnwindSegue:" id="r7S-rW-FzP"/>
+                                            <segue destination="3r8-6b-QEu" kind="unwind" unwindAction="unwindWhenEndedWithUnwindSegue:" id="r7S-rW-FzP"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6v-f5-jwz">
@@ -134,7 +134,7 @@
                                             <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <segue destination="3r8-6b-QEu" kind="unwind" unwindAction="unwindToHomeWithUnwindSegue:" id="5DI-ck-n5L"/>
+                                            <segue destination="3r8-6b-QEu" kind="unwind" unwindAction="unwindWhenDoneWithUnwindSegue:" id="5DI-ck-n5L"/>
                                         </connections>
                                     </button>
                                 </subviews>

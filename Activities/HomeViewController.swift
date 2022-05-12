@@ -24,8 +24,20 @@ class HomeViewController: UIViewController {
         readNotTerminatedActivities()
     }
     
-    @IBAction func navigateToEditActivity(_ sender: UIButton) {
-        performSegue(withIdentifier: "NewActivity", sender: sender)
+    func readNotTerminatedActivities() {
+        Model.notTerminatedActivities = Model.selectAllNotTerminatedActivities()
+        
+        activitiesTableView.reloadData()
+    }
+    
+    func startTimer(_ sender: UIButton) {
+        Model.scheduledTimers[sender.tag] = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel(sender:)), userInfo: sender.tag, repeats: true)
+    }
+    
+    func stopTimer(_ sender: UIButton) {
+        if let removedTimer = Model.scheduledTimers.removeValue(forKey: sender.tag) {
+            removedTimer.invalidate()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,12 +52,12 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func presentHomeView() {
-        
+    @IBAction func navigateToEditActivity(_ sender: UIButton) {
+        performSegue(withIdentifier: "NewActivity", sender: sender)
     }
     
-    func startTimer(_ sender: UIButton) {
-        Model.scheduledTimers[sender.tag] = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel(sender:)), userInfo: sender.tag, repeats: true)
+    func presentHomeView() {
+        
     }
     
     @objc func updateTimerLabel(sender: Timer) {
@@ -53,12 +65,6 @@ class HomeViewController: UIViewController {
         activitiesTableView.reloadData()
         Model.save()
 //        print(scheduledTimers.keys)
-    }
-    
-    func stopTimer(_ sender: UIButton) {
-        if let removedTimer = Model.scheduledTimers.removeValue(forKey: sender.tag) {
-            removedTimer.invalidate()
-        }
     }
     
     func stopTimer(indexRow: Int) {
@@ -71,14 +77,8 @@ class HomeViewController: UIViewController {
         
     }
     
-    func readNotTerminatedActivities() {
-        Model.notTerminatedActivities = Model.selectAllNotTerminatedActivities()
-        
-        activitiesTableView.reloadData()
-    }
-    
     // Used when the user taps the done button
-    @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
+    @IBAction func unwindWhenDone(unwindSegue: UIStoryboardSegue) {
         if let editActivityController = unwindSegue.source as? EditActivityController {
             
             if editActivityController.editActivityTitleLabel.text == "Edit Activity" {
@@ -86,12 +86,11 @@ class HomeViewController: UIViewController {
             } else if editActivityController.editActivityTitleLabel.text == "New Activity" {
                 editActivityController.storeActivityData()
             }
-//                        print(Model.selectAllActivities(orderedBy: "idActivity"))
         }
     }
     
     // Used when the user taps the end activity button
-    @IBAction func endActivityUnwind(unwindSegue: UIStoryboardSegue) {
+    @IBAction func unwindWhenEnded(unwindSegue: UIStoryboardSegue) {
         if let editActivityController = unwindSegue.source as? EditActivityController {
             editActivityController.updateActivityData(terminateActivity: true)
             stopTimer(indexRow: editActivityController.currentCellIndex!.row)
