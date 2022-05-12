@@ -5,11 +5,8 @@ import UIKit
 class Model {
     static var terminatedActivities: [Activity] = []
     static var notTerminatedActivities: [Activity] = []
-    
-    init() {
-        
-    }
-    
+
+    // Creates a record in database with all the fields as parameters
     static func createRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
         var managedObject: NSManagedObject
 
@@ -27,6 +24,21 @@ class Model {
         save()
     }
     
+    // Updates a record in database with all the fields as parameters exceot real time
+    static func updateRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, isTerminated: Bool) {
+        let activity = selectActivityById(id)
+    
+        activity.idActivity = id
+        activity.activityName = name
+        activity.activityDescription = description
+        activity.activityEstimatedTime = estimatedTime
+        activity.activityScheduledTime = scheduledTime
+        activity.activityIsTerminated = isTerminated
+        
+        save()
+    }
+    
+    // Updates a record in database with all the fields as parameters
     static func updateRecordInDatabase(id: Int64, name: String, description: String, estimatedTime: Int64, scheduledTime: Int64, realTime: Int64, isTerminated: Bool) {
         let activity = selectActivityById(id)
     
@@ -35,7 +47,7 @@ class Model {
         activity.activityDescription = description
         activity.activityEstimatedTime = estimatedTime
         activity.activityScheduledTime = scheduledTime
-        //activity.activityRealTime = realTime
+        activity.activityRealTime = realTime
         activity.activityIsTerminated = isTerminated
         
         save()

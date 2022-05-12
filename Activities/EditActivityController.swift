@@ -75,17 +75,22 @@ class EditActivityController: UIViewController {
         switch time {
         case .estimated:
             timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityEstimatedTime.date)
+            timeComponents.second = 0
         case .scheduled:
             timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityScheduledTime.date)
+            timeComponents.second = 0
         case .real:
             timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityRealTime.date)
             if endActivityButtonIsHidden {
                 timeComponents.hour = 0
                 timeComponents.minute = 0
+                timeComponents.second = 0
+            } else {
+                timeComponents.second = Int(Model.selectActivityById(currentActivityId!).activityRealTime % 60)
             }
         }
         
-        totalTime = Int64(timeComponents.hour! * 3600 + timeComponents.minute! * 60)
+        totalTime = Int64(timeComponents.hour! * 3600 + timeComponents.minute! * 60 + timeComponents.second!)
         
         return totalTime
     }
