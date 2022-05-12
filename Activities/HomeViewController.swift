@@ -4,7 +4,6 @@ class HomeViewController: UIViewController {
     
     @IBOutlet var activitiesTableView: UITableView!
     var currentIndex: Int64 = 0
-    var scheduledTimers = [Int: Timer]()
     var isInitialized = false
     
     override func viewDidLoad() {
@@ -17,7 +16,7 @@ class HomeViewController: UIViewController {
         activitiesTableView.register(nib, forCellReuseIdentifier: "ActivitiesTableViewCell")
         activitiesTableView.delegate = self
         activitiesTableView.dataSource = self
-//                Model.deleteAllFromUsers()
+//        Model.deleteAllActivities()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +47,7 @@ class HomeViewController: UIViewController {
     }
     
     func startTimer(_ sender: UIButton) {
-        scheduledTimers[sender.tag] = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel(sender:)), userInfo: sender.tag, repeats: true)
+        Model.scheduledTimers[sender.tag] = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel(sender:)), userInfo: sender.tag, repeats: true)
     }
     
     @objc func updateTimerLabel(sender: Timer) {
@@ -59,13 +58,13 @@ class HomeViewController: UIViewController {
     }
     
     func stopTimer(_ sender: UIButton) {
-        if let removedTimer = scheduledTimers.removeValue(forKey: sender.tag) {
+        if let removedTimer = Model.scheduledTimers.removeValue(forKey: sender.tag) {
             removedTimer.invalidate()
         }
     }
     
     func stopTimer(indexRow: Int) {
-        if let removedTimer = scheduledTimers.removeValue(forKey: indexRow) {
+        if let removedTimer = Model.scheduledTimers.removeValue(forKey: indexRow) {
             removedTimer.invalidate()
         }
     }
