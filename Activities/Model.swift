@@ -149,6 +149,12 @@ class Model {
         
         return time
     }
+    
+    static func calculateTotalTime(from time: (hours: Int, minutes: Int, seconds: Int)) -> Int {
+        let totalTime = time.hours * 3600 + time.minutes * 60 + time.seconds
+        
+        return totalTime
+    }
 }
 
 extension Model {

@@ -68,11 +68,12 @@ class EditActivityController: UIViewController {
         }
     }
     
+    // Stores the created activity (.newActivity) in the database
     func storeActivityData() {
         var newActivityId: Int64 = 0
-        let estimatedTime = calculateTime(.estimated)
-        let scheduledTime = calculateTime(.scheduled)
-        let realTime = calculateTime(.real)
+        let estimatedTime = getTimeFrom(picker: .estimated)
+        let scheduledTime = getTimeFrom(picker: .scheduled)
+        let realTime = getTimeFrom(picker: .real)
     
         if let previousActivity = Model.selectAllActivities(orderedBy: "idActivity").first {
             newActivityId = previousActivity.idActivity + 1
@@ -81,40 +82,45 @@ class EditActivityController: UIViewController {
         Model.createRecordInDatabase(id: newActivityId, name: activityNameTextField.text!, description: activityDescriptionTextView.text!, estimatedTime: estimatedTime, scheduledTime: activityHasScheduledTimeSwitch.isOn ? scheduledTime : -1, realTime: realTime, isTerminated: false)
     }
     
-    func updateActivityData(terminateActivity: Bool) {
-        let estimatedTime = calculateTime(.estimated)
-        let scheduledTime = calculateTime(.scheduled)
-        let realTime = calculateTime(.real)
-        
-        Model.updateRecordInDatabase(id: Model.currentActivityId!, name: activityNameTextField.text!, description: activityDescriptionTextView.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
-    }
-    
-    // Calculation about the time displayed
-    func calculateTime(_ time: DatePickerType) -> Int64 {
+    // Gets the time in seconds from the given picker
+    func getTimeFrom(picker: DatePickerType) -> Int64 {
         var timeComponents: DateComponents
         var totalTime: Int64
+        let timeComponentsTuple: (hours: Int, minutes: Int, seconds: Int)
         
-        switch time {
+        switch picker {
         case .estimated:
-            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityEstimatedTimeDatePicker.date)
-            timeComponents.second = 0
+            // .second will always be 0 in picker
+            timeComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: activityEstimatedTimeDatePicker.date)
         case .scheduled:
-            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityScheduledTimeDatePicker.date)
-            timeComponents.second = 0
+            // .second will always be 0 in picker
+            timeComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: activityScheduledTimeDatePicker.date)
         case .real:
-            timeComponents = Calendar.current.dateComponents([.hour, .minute], from: activityRealTimeDatePicker.date)
+            // .second will always be 0 in picker
+            timeComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: activityRealTimeDatePicker.date)
+            
             if controllerType == .newActivity {
                 timeComponents.hour = 0
                 timeComponents.minute = 0
                 timeComponents.second = 0
             } else {
-                timeComponents.second = Int(Model.selectActivityById(Model.currentActivityId!).activityRealTime % 60)
+                let currentActivityRealTime = Int(Model.currentActivity!.activityRealTime)
+                timeComponents.second = Model.calculateModulusTime(seconds: currentActivityRealTime).seconds
             }
         }
         
-        totalTime = Int64(timeComponents.hour! * 3600 + timeComponents.minute! * 60 + timeComponents.second!)
+        timeComponentsTuple = (timeComponents.hour!, timeComponents.minute!, timeComponents.second!)
+        totalTime = Int64(Model.calculateTotalTime(from: timeComponentsTuple))
         
         return totalTime
+    }
+    
+    func updateActivityData(terminateActivity: Bool) {
+        let estimatedTime = getTimeFrom(picker: .estimated)
+        let scheduledTime = getTimeFrom(picker: .scheduled)
+        let realTime = getTimeFrom(picker: .real)
+        
+        Model.updateRecordInDatabase(id: Model.currentActivityId!, name: activityNameTextField.text!, description: activityDescriptionTextView.text!, estimatedTime: estimatedTime, scheduledTime: scheduledTime, realTime: realTime, isTerminated: terminateActivity)
     }
     
     // Used in tabbar
