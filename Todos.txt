@@ -1,5 +1,3 @@
 #TODO
-Format time and duration to display hours and minutes in activities - in progress
-Format time and duration to display hours and minutes in logs
 Seconds are not counted correctly when closing the app
 

@@ -41,12 +41,20 @@ extension LogsController: UITableViewDataSource {
     
     // Specifies which cell is going to use and selects the data that is going to fill
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var percentageDuration: Double = Double(Model.terminatedActivities[indexPath.row].activityRealTime) * 100 / 1440
+        var percentageDuration: Double = Double(Model.terminatedActivities[indexPath.row].activityRealTime) * 100 / 86400
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "LogsTableViewCell", for: indexPath) as! LogsTableViewCell
         
         cell.LogsActivityNameLabel.text = Model.terminatedActivities[indexPath.row].activityName
-        cell.LogsActivityDurationLabel.text = String(Model.terminatedActivities[indexPath.row].activityRealTime)
+        
+        // Calculate string to display
+        var calculatedString = ""
+        let seconds = Model.terminatedActivities[indexPath.row].activityRealTime
+        calculatedString += String(format: "%02d:", seconds / 3600 % 24)
+        calculatedString += String(format: "%02d:", seconds / 60 % 60)
+        calculatedString += String(format: "%02d", seconds % 60)
+        cell.LogsActivityDurationLabel.text = calculatedString
+        
         cell.LogsActivityPercentageLabel.text = String(format: "%.1f", percentageDuration) + "%"
         
         return cell
