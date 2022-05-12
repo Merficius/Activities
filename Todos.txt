@@ -3,18 +3,3 @@ Format time and duration to display hours and minutes in activities
 Format time and duration to display hours and minutes in logs
 Seconds are not counted correctly when closing the app
 
-
-
-
-
-
-## BONDZU
-
-cuenta y registrar info de productos (nos tiene que dar)
-
-nos van a dar las imagenes de los libros? - ver con daniela
-
-esta bien empezar con imagenes y audio, añadir funcionalidades despues? - si
-
-empezamos con un libro? - 10 ilustraciones
-
