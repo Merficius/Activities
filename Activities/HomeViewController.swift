@@ -17,7 +17,6 @@ class HomeViewController: UIViewController {
         // Establishing the delegate and datasource of tableview to be this controller
         activitiesTableView.delegate = self
         activitiesTableView.dataSource = self
-//                Model.deleteAllActivities()
     }
     
     // Executed each time that the view is placed in the hierarchy (more often than viewDidLoad)
@@ -98,10 +97,10 @@ class HomeViewController: UIViewController {
     @IBAction func unwindWhenDone(unwindSegue: UIStoryboardSegue) {
         if let editActivityController = unwindSegue.source as? EditActivityController {
             
-            if editActivityController.editActivityTitleLabel.text == "Edit Activity" {
-                editActivityController.updateActivityData(terminateActivity: false)
-            } else if editActivityController.editActivityTitleLabel.text == "New Activity" {
+            if editActivityController.controllerType == .newActivity {
                 editActivityController.storeActivityData()
+            } else if editActivityController.controllerType == .editActivity {
+                editActivityController.updateActivityData(terminateActivity: false)
             }
         }
     }
@@ -117,6 +116,7 @@ class HomeViewController: UIViewController {
     // Called when the user taps the delete button
     @IBAction func unwindWhenDeleted(unwindSegue: UIStoryboardSegue) {
         if let editActivityController = unwindSegue.source as? EditActivityController {
+            editActivityController.deleteActivityData()
             stopTimer(indexRow: editActivityController.currentCellIndex!.row)
         }
     }

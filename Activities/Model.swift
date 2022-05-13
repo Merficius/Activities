@@ -160,7 +160,7 @@ class Model {
     // Calculates the percentage of the given seconds in a day and returns a ready to use string
     static func calculatePercentage(ofSeconds seconds: Double) -> String {
         let percentage = seconds * 100 / 86_400
-        let percentageString = String(format: "%.1f%", percentage)
+        let percentageString = String(format: "%.1f", percentage) + "%"
         
         return percentageString
     }

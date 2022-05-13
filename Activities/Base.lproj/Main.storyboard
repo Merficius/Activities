@@ -173,7 +173,6 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qXm-qk-yrE">
                                         <rect key="frame" x="0.0" y="20.333333333333343" width="358" height="61"/>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                        <string key="text">This activity is done as a test. Only three lines may be visible at a given time. Lorem ipsum Lorem Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem</string>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -269,7 +268,6 @@
                                     <color key="baseBackgroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="deleteActivity:" destination="kCa-Ig-bhl" eventType="touchUpInside" id="4r6-Hb-do7"/>
                                     <segue destination="3r8-6b-QEu" kind="unwind" unwindAction="unwindWhenDeletedWithUnwindSegue:" id="AQ0-um-l33"/>
                                 </connections>
                             </button>

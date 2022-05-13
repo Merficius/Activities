@@ -19,16 +19,9 @@ class EditActivityController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        editActivityTitleLabel.text = controllerType == .newActivity ? "New Activity" : "Edit Activity"
         
         if controllerType == .newActivity {
-            endActivityButton.isHidden = true
-            editActivityTitleLabel.textAlignment = .left
-            
-            activityRealTimeLabel.isHidden = true
-            activityRealTimeDatePicker.isHidden = true
-            
-            deleteActivityButton.isHidden = true
+            presentNewActivityView()
         } else {
             presentEditActivityView()
         }
@@ -37,6 +30,8 @@ class EditActivityController: UIViewController {
     // Fills the data for the already created activity
     func presentEditActivityView() {
         guard let currentActivity = Model.currentActivity else { return }
+        
+        editActivityTitleLabel.text = "Edit Activity"
         
         activityNameTextField.text = currentActivity.activityName
 
@@ -48,6 +43,19 @@ class EditActivityController: UIViewController {
         setTimeForPicker(.scheduled, seconds: Int(currentActivity.activityScheduledTime))
         
         setTimeForPicker(.real, seconds: Int(currentActivity.activityRealTime))
+    }
+    
+    // Hides elements of interface when creating a new activity
+    func presentNewActivityView() {
+        editActivityTitleLabel.text = "New Activity"
+
+        endActivityButton.isHidden = true
+        editActivityTitleLabel.textAlignment = .left
+        
+        activityRealTimeLabel.isHidden = true
+        activityRealTimeDatePicker.isHidden = true
+        
+        deleteActivityButton.isHidden = true
     }
     
     // Sets dates for date pickers based on seconds
@@ -129,7 +137,7 @@ class EditActivityController: UIViewController {
         
     }
     
-    @IBAction func deleteActivity(_ sender: UIButton) {
+    func deleteActivityData() {
         Model.deleteFromActivities(withId: Model.currentActivityId!)
     }
     
