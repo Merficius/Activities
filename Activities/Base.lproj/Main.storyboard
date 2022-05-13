@@ -264,7 +264,7 @@
                                     <constraint firstAttribute="height" constant="50" id="gKU-69-ckv"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Delete activity">
+                                <buttonConfiguration key="configuration" style="filled" title="Delete Activity">
                                     <color key="baseBackgroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
                                 <connections>
