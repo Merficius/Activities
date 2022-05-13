@@ -87,12 +87,7 @@ class HomeViewController: UIViewController {
             performSegue(withIdentifier: "EditActivity", sender: sender)
         }
     }
-    
-    // Used in tabbar
-    func navigateToLogs() {
-        
-    }
-    
+
     // Called when the user taps the done button
     @IBAction func unwindWhenDone(unwindSegue: UIStoryboardSegue) {
         if let editActivityController = unwindSegue.source as? EditActivityController {

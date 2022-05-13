@@ -1,3 +1,0 @@
-#TODO
-Seconds are not counted correctly when closing the app
-

@@ -31,11 +31,6 @@ class LogsController: UIViewController {
     func readTerminatedActivities() {
         Model.terminatedActivities = Model.selectAllTerminatedActivities()
     }
-    
-    // Tabbar
-    func navigateToHomeView() {
-        
-    }
 }
 
 extension LogsController: UITableViewDataSource {

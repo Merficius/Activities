@@ -132,11 +132,6 @@ class EditActivityController: UIViewController {
         return totalTime
     }
     
-    // Used in tabbar
-    func navigateToHome() {
-        
-    }
-    
     func deleteActivityData() {
         Model.deleteFromActivities(withId: Model.currentActivityId!)
     }
